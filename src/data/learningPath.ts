@@ -1,0 +1,980 @@
+import type { Phase } from '../types'
+
+export const LEARNING_PATH: Phase[] = [
+  {
+    id: 'foundations',
+    number: 1,
+    title: 'AI & ML Foundations',
+    level: 'beginner',
+    levelLabel: 'Beginner',
+    description:
+      'Build mathematical intuition, Python fluency, and classical ML literacy before touching LLMs.',
+    estimatedWeeks: '8–12 weeks',
+    steps: [
+      {
+        id: 'f1',
+        title: 'Understand the landscape',
+        objective: 'Know what AI, ML, and deep learning are — and where LLMs fit.',
+        resources: [
+          {
+            id: 'ml-beginners',
+            title: 'Machine Learning for Beginners (Microsoft)',
+            url: 'https://github.com/microsoft/ML-For-Beginners',
+            type: 'repo',
+            difficulty: 'beginner',
+            duration: '12 weeks',
+            description:
+              '26-lesson curriculum covering classical ML with Python, quizzes, and projects.',
+            tags: ['ml', 'python', 'fundamentals'],
+          },
+          {
+            id: 'made-with-ml',
+            title: 'Made With ML',
+            url: 'https://github.com/GokuMohandas/MadeWithML',
+            type: 'repo',
+            difficulty: 'beginner',
+            duration: '6–8 weeks',
+            description:
+              'Production-focused ML course: data, training, evaluation, and MLOps patterns.',
+            tags: ['mlops', 'production', 'python'],
+          },
+          {
+            id: 'udl-book',
+            title: 'Understanding Deep Learning',
+            url: 'https://udlbook.github.io/udlbook/',
+            type: 'book',
+            difficulty: 'beginner',
+            description:
+              'Free textbook with visual explanations of neural networks and deep learning math.',
+            tags: ['deep-learning', 'theory', 'math'],
+          },
+        ],
+      },
+      {
+        id: 'f2',
+        title: 'Design production ML systems',
+        objective: 'Learn how real ML systems are scoped, built, and maintained.',
+        resources: [
+          {
+            id: 'dmls',
+            title: 'Designing Machine Learning Systems',
+            url: 'https://www.oreilly.com/library/view/designing-machine-learning/9781098115784/',
+            type: 'book',
+            difficulty: 'intermediate',
+            description:
+              'Chip Huyen’s guide to data, modeling, deployment, and monitoring at scale.',
+            tags: ['ml-systems', 'production', 'architecture'],
+          },
+          {
+            id: 'awesome-genai',
+            title: 'Awesome Generative AI Guide',
+            url: 'https://github.com/aishwaryanr/awesome-generative-ai-guide',
+            type: 'repo',
+            difficulty: 'beginner',
+            description:
+              'Curated hub: papers, interview prep, free courses, and applied LLM notebooks.',
+            tags: ['curated', 'roadmap', 'reference'],
+          },
+        ],
+      },
+      {
+        id: 'f3',
+        title: 'Stay current from day one',
+        objective: 'Subscribe to newsletters that filter signal from the AI noise.',
+        resources: [
+          {
+            id: 'gradient-ascent',
+            title: 'Gradient Ascent',
+            url: 'https://newsletter.artofsaience.com/',
+            type: 'newsletter',
+            difficulty: 'beginner',
+            description:
+              'Weekly AI digest trusted by researchers and engineers — papers, demos, and essays.',
+            tags: ['research', 'weekly', 'curated'],
+          },
+          {
+            id: 'data-hustle',
+            title: 'Data Hustle',
+            url: 'https://thedatahustle.substack.com/',
+            type: 'newsletter',
+            difficulty: 'beginner',
+            description:
+              'Career and practical data skills — useful while building your AI foundation.',
+            tags: ['career', 'data-science'],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'llm-fundamentals',
+    number: 2,
+    title: 'LLM Fundamentals',
+    level: 'beginner',
+    levelLabel: 'Beginner → Intermediate',
+    description:
+      'Understand how transformers work, how to prompt effectively, and how LLMs are built.',
+    estimatedWeeks: '6–8 weeks',
+    steps: [
+      {
+        id: 'l1',
+        title: 'What are LLMs?',
+        objective: 'Build intuition for language models before writing agent code.',
+        resources: [
+          {
+            id: 'llm-intro-video',
+            title: 'LLM Introduction',
+            url: 'https://www.youtube.com/watch?v=zjkBMFhNj_g',
+            type: 'video',
+            difficulty: 'beginner',
+            duration: '~1 hr',
+            description:
+              'Accessible overview of what LLMs are and why they matter for builders.',
+            tags: ['overview', 'llm'],
+          },
+          {
+            id: 'hands-on-llm',
+            title: 'Hands-On Large Language Models',
+            url: 'https://github.com/HandsOnLLM/Hands-On-Large-Language-Models',
+            type: 'repo',
+            difficulty: 'beginner',
+            duration: '4–6 weeks',
+            description:
+              '“The Illustrated LLM Book” — 300+ figures, Colab notebooks, RAG and fine-tuning.',
+            tags: ['llm', 'rag', 'visual'],
+          },
+          {
+            id: 'llm-course',
+            title: 'LLM Course (mlabonne)',
+            url: 'https://github.com/mlabonne/llm-course',
+            type: 'repo',
+            difficulty: 'beginner',
+            description:
+              'Structured roadmap: LLM fundamentals, fine-tuning, quantization, and deployment.',
+            tags: ['roadmap', 'fine-tuning', 'reference'],
+          },
+          {
+            id: 'transformers-course',
+            title: 'How Transformer LLMs Work',
+            url: 'https://www.deeplearning.ai/courses/how-transformer-llms-work/',
+            type: 'course',
+            difficulty: 'beginner',
+            duration: '1 hr',
+            description:
+              'Jay Alammar & Maarten Grootendorst explain the architecture behind modern LLMs.',
+            tags: ['transformers', 'architecture'],
+          },
+        ],
+      },
+      {
+        id: 'l2',
+        title: 'Prompt engineering mastery',
+        objective: 'Learn to communicate reliably with LLMs — the skill every agent builds on.',
+        resources: [
+          {
+            id: 'prompt-guide',
+            title: 'Prompt Engineering Guide',
+            url: 'https://www.promptingguide.ai/',
+            type: 'guide',
+            difficulty: 'beginner',
+            description:
+              'Comprehensive guide: techniques, RAG, agents, model-specific tips, and papers.',
+            tags: ['prompting', 'techniques', 'rag'],
+          },
+          {
+            id: 'cot-paper',
+            title: 'Chain-of-Thought Prompting',
+            url: 'https://arxiv.org/abs/2201.11903',
+            type: 'paper',
+            difficulty: 'intermediate',
+            description:
+              'Seminal paper showing how step-by-step reasoning dramatically improves LLM accuracy.',
+            tags: ['reasoning', 'prompting', 'foundational'],
+          },
+        ],
+      },
+      {
+        id: 'l3',
+        title: 'Build an LLM from scratch',
+        objective: 'Demystify the black box by implementing core components yourself.',
+        resources: [
+          {
+            id: 'llm-scratch-video',
+            title: 'LLMs from Scratch',
+            url: 'https://www.youtube.com/watch?v=9vM4p9NN0Ts',
+            type: 'video',
+            difficulty: 'intermediate',
+            duration: 'Multi-part',
+            description:
+              'Video walkthrough of building and training a language model from first principles.',
+            tags: ['implementation', 'training'],
+          },
+          {
+            id: 'llm-scratch-book',
+            title: 'Build a Large Language Model (From Scratch)',
+            url: 'https://github.com/rasbt/LLMs-from-scratch',
+            type: 'book',
+            difficulty: 'intermediate',
+            description:
+              'Sebastian Raschka’s hands-on book + code: GPT architecture, pretraining, fine-tuning.',
+            tags: ['implementation', 'pytorch', 'gpt'],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'applied-llm',
+    number: 3,
+    title: 'Applied LLM Engineering',
+    level: 'intermediate',
+    levelLabel: 'Intermediate',
+    description:
+      'RAG, embeddings, vector search, and evaluation — the skills behind production LLM apps.',
+    estimatedWeeks: '6–8 weeks',
+    steps: [
+      {
+        id: 'a1',
+        title: 'Retrieval & vector databases',
+        objective: 'Store and retrieve knowledge so LLMs can answer beyond their training data.',
+        resources: [
+          {
+            id: 'vector-db-pinecone',
+            title: 'Building Applications with Vector Databases',
+            url: 'https://www.deeplearning.ai/courses/building-applications-vector-databases/',
+            type: 'course',
+            difficulty: 'intermediate',
+            duration: '1 hr',
+            description:
+              'Six Pinecone apps: semantic search, RAG, recommenders, hybrid search, anomaly detection.',
+            tags: ['vector-db', 'pinecone', 'rag'],
+          },
+          {
+            id: 'vector-db-weaviate',
+            title: 'Vector Databases: from Embeddings to Applications',
+            url: 'https://www.deeplearning.ai/courses/vector-databases-embeddings-applications/',
+            type: 'course',
+            difficulty: 'intermediate',
+            duration: '2 hrs',
+            description:
+              'Design real-world vector search apps with Weaviate — hybrid and multilingual search.',
+            tags: ['vector-db', 'embeddings', 'weaviate'],
+          },
+          {
+            id: 'rag-survey',
+            title: 'Retrieval-Augmented Generation Survey',
+            url: 'https://arxiv.org/abs/2312.10997',
+            type: 'paper',
+            difficulty: 'advanced',
+            description:
+              'Comprehensive survey of RAG architectures, evaluation, and open challenges.',
+            tags: ['rag', 'survey', 'research'],
+          },
+        ],
+      },
+      {
+        id: 'a2',
+        title: 'Build and evaluate RAG apps',
+        objective: 'Go from naive retrieval to production-grade RAG with proper evaluation.',
+        resources: [
+          {
+            id: 'advanced-rag',
+            title: 'Building and Evaluating Advanced RAG',
+            url: 'https://www.deeplearning.ai/courses/building-evaluating-advanced-rag/',
+            type: 'course',
+            difficulty: 'intermediate',
+            duration: '1.5 hrs',
+            description:
+              'Sentence-window, auto-merging retrieval, and evaluation with LlamaIndex + TruEra.',
+            tags: ['rag', 'evaluation', 'llamaindex'],
+          },
+          {
+            id: 'improve-accuracy',
+            title: 'Improving Accuracy of LLM Applications',
+            url: 'https://www.deeplearning.ai/courses/improving-accuracy-of-llm-applications/',
+            type: 'course',
+            difficulty: 'intermediate',
+            duration: '1 hr',
+            description:
+              'Systematic accuracy improvements via evaluation, prompting, and memory tuning.',
+            tags: ['evaluation', 'accuracy', 'production'],
+          },
+          {
+            id: 'llm-handbook',
+            title: 'The LLM Engineering Handbook',
+            url: 'https://github.com/PacktPublishing/LLM-Engineers-Handbook',
+            type: 'book',
+            difficulty: 'intermediate',
+            description:
+              'End-to-end LLM Twin project: data pipelines, fine-tuning, RAG, AWS deployment, LLMOps.',
+            tags: ['llmops', 'production', 'rag'],
+          },
+          {
+            id: 'hands-on-ai-eng',
+            title: 'Hands-On AI Engineering',
+            url: 'https://github.com/Sumanth077/Hands-On-AI-Engineering',
+            type: 'repo',
+            difficulty: 'intermediate',
+            description:
+              'Practical AI engineering patterns, projects, and production workflows.',
+            tags: ['engineering', 'projects'],
+          },
+        ],
+      },
+      {
+        id: 'a3',
+        title: 'Deep technical reading',
+        objective: 'Follow researchers who explain LLM internals and evaluation rigorously.',
+        resources: [
+          {
+            id: 'deep-focus',
+            title: 'Deep (Learning) Focus',
+            url: 'https://cameronrwolfe.substack.com/',
+            type: 'newsletter',
+            difficulty: 'intermediate',
+            description:
+              'Netflix research scientist explains transformers, SFT, RL, and agent evaluation in depth.',
+            tags: ['research', 'technical', 'llm'],
+          },
+          {
+            id: 'decoding-ml',
+            title: 'DecodingML',
+            url: 'https://www.decodingai.com/',
+            type: 'newsletter',
+            difficulty: 'intermediate',
+            description:
+              'Paul Iusztin on designing, building, and shipping AI software from idea to production.',
+            tags: ['engineering', 'production', 'agents'],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'agent-foundations',
+    number: 4,
+    title: 'Agent Foundations',
+    level: 'intermediate',
+    levelLabel: 'Intermediate → Advanced',
+    description:
+      'Understand agent architectures, core papers, and design patterns before building your own.',
+    estimatedWeeks: '6–8 weeks',
+    steps: [
+      {
+        id: 'ag1',
+        title: 'What is agentic AI?',
+        objective: 'Learn the theory and vocabulary behind autonomous LLM systems.',
+        resources: [
+          {
+            id: 'stanford-agents',
+            title: 'Agentic AI Overview (Stanford)',
+            url: 'https://www.youtube.com/watch?v=kJLiOGle3Lw',
+            type: 'video',
+            difficulty: 'intermediate',
+            duration: '~1 hr',
+            description:
+              'Academic overview of agentic AI concepts, capabilities, and research directions.',
+            tags: ['overview', 'theory', 'stanford'],
+          },
+          {
+            id: 'google-agents-wp',
+            title: "Google's Agent Whitepaper",
+            url: 'https://storage.ghost.io/c/dc/a8/dca8ae32-7ed6-405a-b948-680b55c8f3dc/content/files/2025/01/Whitepaper-Agents---Google.pdf',
+            type: 'guide',
+            difficulty: 'intermediate',
+            description:
+              'Models, tools, and orchestration — cognitive architectures for generative AI agents.',
+            tags: ['architecture', 'google', 'orchestration'],
+          },
+          {
+            id: 'agentic-ai-course',
+            title: 'Agentic AI (Andrew Ng)',
+            url: 'https://www.deeplearning.ai/courses/agentic-ai/',
+            type: 'course',
+            difficulty: 'intermediate',
+            duration: '4 weeks',
+            description:
+              'Build agentic systems with reflection, tool use, planning, and multi-agent patterns.',
+            tags: ['agents', 'patterns', 'andrew-ng'],
+          },
+        ],
+      },
+      {
+        id: 'ag2',
+        title: 'Foundational agent papers',
+        objective: 'Read the research that defines modern agent behavior.',
+        resources: [
+          {
+            id: 'react-paper',
+            title: 'ReAct: Reasoning + Acting',
+            url: 'https://arxiv.org/abs/2210.03629',
+            type: 'paper',
+            difficulty: 'intermediate',
+            description:
+              'Interleave reasoning traces with tool actions — the pattern behind most agents today.',
+            tags: ['reasoning', 'tools', 'foundational'],
+          },
+          {
+            id: 'toolformer-paper',
+            title: 'Toolformer',
+            url: 'https://arxiv.org/abs/2302.04761',
+            type: 'paper',
+            difficulty: 'advanced',
+            description:
+              'Self-supervised tool learning — models teach themselves when and how to call APIs.',
+            tags: ['tools', 'self-supervised'],
+          },
+          {
+            id: 'tot-paper',
+            title: 'Tree of Thoughts',
+            url: 'https://arxiv.org/abs/2305.10601',
+            type: 'paper',
+            difficulty: 'advanced',
+            description:
+              'Deliberate problem-solving via branching reasoning trees and backtracking.',
+            tags: ['reasoning', 'planning'],
+          },
+        ],
+      },
+      {
+        id: 'ag3',
+        title: 'Agent design best practices',
+        objective: 'Learn from Anthropic, OpenAI, and Google how to build agents that actually work.',
+        resources: [
+          {
+            id: 'anthropic-agents',
+            title: 'Building Effective Agents (Anthropic)',
+            url: 'https://www.anthropic.com/engineering/building-effective-agents',
+            type: 'guide',
+            difficulty: 'intermediate',
+            description:
+              'Start simple, use composable patterns, craft tool interfaces — Anthropic’s playbook.',
+            tags: ['best-practices', 'anthropic', 'design'],
+          },
+          {
+            id: 'openai-agents',
+            title: "OpenAI's Practical Guide to Building Agents",
+            url: 'https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf',
+            type: 'guide',
+            difficulty: 'intermediate',
+            description:
+              'Use-case identification, orchestration patterns, guardrails, and human-in-the-loop.',
+            tags: ['best-practices', 'openai', 'production'],
+          },
+          {
+            id: 'effective-agents-video',
+            title: 'Building Effective Agents',
+            url: 'https://www.youtube.com/watch?v=D7_ipDqhtwk',
+            type: 'video',
+            difficulty: 'intermediate',
+            duration: '~1 hr',
+            description:
+              'Talk expanding on Anthropic’s agent design principles with real-world examples.',
+            tags: ['best-practices', 'talk'],
+          },
+          {
+            id: 'google-companion',
+            title: "Google's Agent Companion",
+            url: 'https://davidmerzel.com/wp-content/uploads/2025/05/1746069234054.pdf',
+            type: 'guide',
+            difficulty: 'advanced',
+            description:
+              'Advanced topics: agentic RAG, evaluation frameworks, multi-agent systems, Agent Ops.',
+            tags: ['evaluation', 'multi-agent', 'google'],
+          },
+        ],
+      },
+      {
+        id: 'ag4',
+        title: 'Hands-on agent courses & repos',
+        objective: 'Start building with guided curricula and open-source examples.',
+        resources: [
+          {
+            id: 'ms-agents',
+            title: 'AI Agents for Beginners (Microsoft)',
+            url: 'https://github.com/microsoft/ai-agents-for-beginners',
+            type: 'repo',
+            difficulty: 'beginner',
+            duration: '2–3 weeks',
+            description:
+              '12-lesson course: agent fundamentals, frameworks, RAG, planning, multi-agent, MCP.',
+            tags: ['course', 'microsoft', 'hands-on'],
+          },
+          {
+            id: 'hf-agents',
+            title: "HuggingFace's Agent Course",
+            url: 'https://huggingface.co/learn/agents-course/en/unit0/introduction',
+            type: 'course',
+            difficulty: 'beginner',
+            duration: '4–6 weeks',
+            description:
+              'Free certified course: smolagents, LangGraph, LlamaIndex, and community leaderboard.',
+            tags: ['huggingface', 'certification', 'frameworks'],
+          },
+          {
+            id: 'genai-agents',
+            title: 'GenAI Agents',
+            url: 'https://github.com/nirdiamant/GenAI_Agents',
+            type: 'repo',
+            difficulty: 'intermediate',
+            description:
+              'All-in-one repo: tutorials and implementations for diverse GenAI agent use cases.',
+            tags: ['tutorials', 'examples', 'agents'],
+          },
+          {
+            id: 'agent-design-patterns',
+            title: 'AI Agentic Design Patterns with AutoGen',
+            url: 'https://www.deeplearning.ai/courses/ai-agentic-design-patterns-with-autogen/',
+            type: 'course',
+            difficulty: 'intermediate',
+            duration: '1.5 hrs',
+            description:
+              'Microsoft + Penn State: multi-agent systems with diverse roles using AutoGen.',
+            tags: ['multi-agent', 'autogen', 'patterns'],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'production-agents',
+    number: 5,
+    title: 'Building Production Agents',
+    level: 'advanced',
+    levelLabel: 'Advanced',
+    description:
+      'MCP, memory, evaluation, browser agents, and shipping agents users can trust.',
+    estimatedWeeks: '8–10 weeks',
+    steps: [
+      {
+        id: 'p1',
+        title: 'Build agents with MCP',
+        objective: 'Connect agents to tools and data using the industry-standard protocol.',
+        resources: [
+          {
+            id: 'mcp-video',
+            title: 'Building Agents with MCP',
+            url: 'https://www.youtube.com/watch?v=kQmXtrmQ5Zg',
+            type: 'video',
+            difficulty: 'advanced',
+            duration: '~1 hr',
+            description:
+              'Video guide to Model Context Protocol for tool-augmented agent systems.',
+            tags: ['mcp', 'tools', 'integration'],
+          },
+          {
+            id: 'mcp-course',
+            title: 'MCP with Anthropic',
+            url: 'https://www.deeplearning.ai/courses/mcp-build-rich-context-ai-apps-with-anthropic/',
+            type: 'course',
+            difficulty: 'intermediate',
+            duration: '1.5 hrs',
+            description:
+              'Build MCP servers with FastMCP, connect Claude Desktop, deploy remotely.',
+            tags: ['mcp', 'anthropic', 'hands-on'],
+          },
+          {
+            id: 'mcp-book',
+            title: 'AI Agents with MCP',
+            url: 'https://www.oreilly.com/library/view/ai-agents-with/9798341639546/',
+            type: 'book',
+            difficulty: 'advanced',
+            description:
+              'Kyle Stratis: MCP servers, clients, transport layers, and agent workflows in Python.',
+            tags: ['mcp', 'book', 'implementation'],
+          },
+        ],
+      },
+      {
+        id: 'p2',
+        title: 'Agent memory & state',
+        objective: 'Build agents that persist knowledge and improve across sessions.',
+        resources: [
+          {
+            id: 'agent-memory',
+            title: 'Agent Memory: Building Memory-Aware Agents',
+            url: 'https://www.deeplearning.ai/courses/agent-memory-building-memory-aware-agents/',
+            type: 'course',
+            difficulty: 'advanced',
+            duration: '2 hrs',
+            description:
+              'Memory-first architecture: persistent stores, semantic tool retrieval, write-back loops.',
+            tags: ['memory', 'state', 'production'],
+          },
+          {
+            id: 'generative-agents',
+            title: 'Generative Agents',
+            url: 'https://arxiv.org/abs/2304.03442',
+            type: 'paper',
+            difficulty: 'advanced',
+            description:
+              'Simulated human-like agents with memory, reflection, and planning (Stanford/Google).',
+            tags: ['memory', 'simulation', 'research'],
+          },
+        ],
+      },
+      {
+        id: 'p3',
+        title: 'Build and evaluate agents',
+        objective: 'Implement agents from scratch and measure them systematically.',
+        resources: [
+          {
+            id: 'build-eval-video',
+            title: 'Building and Evaluating Agents',
+            url: 'https://www.youtube.com/watch?v=d5EltXhbcfA',
+            type: 'video',
+            difficulty: 'advanced',
+            duration: '~1 hr',
+            description:
+              'End-to-end walkthrough of agent construction and structured evaluation.',
+            tags: ['evaluation', 'implementation'],
+          },
+          {
+            id: 'agent-scratch-video',
+            title: 'Building an Agent from Scratch',
+            url: 'https://www.youtube.com/watch?v=xzXdLRUyjUg',
+            type: 'video',
+            difficulty: 'advanced',
+            duration: '~1 hr',
+            description:
+              'Minimal agent implementation — understand every component before using frameworks.',
+            tags: ['implementation', 'from-scratch'],
+          },
+          {
+            id: 'eval-agents',
+            title: 'Evaluating AI Agents',
+            url: 'https://www.deeplearning.ai/courses/evaluating-ai-agents/',
+            type: 'course',
+            difficulty: 'advanced',
+            duration: '1.5 hrs',
+            description:
+              'Code-based and LLM-as-judge evaluators, router/skill testing, trace-based experiments.',
+            tags: ['evaluation', 'observability', 'arize'],
+          },
+          {
+            id: 'reflexion-paper',
+            title: 'Reflexion',
+            url: 'https://arxiv.org/abs/2303.11366',
+            type: 'paper',
+            difficulty: 'advanced',
+            description:
+              'Verbal reinforcement learning — agents reflect on failures and improve iteratively.',
+            tags: ['self-improvement', 'evaluation'],
+          },
+        ],
+      },
+      {
+        id: 'p4',
+        title: 'Specialized agent capabilities',
+        objective: 'Browser automation, computer use, and agentic coding workflows.',
+        resources: [
+          {
+            id: 'browser-agents',
+            title: 'Building Browser Agents',
+            url: 'https://www.deeplearning.ai/courses/building-ai-browser-agents/',
+            type: 'course',
+            difficulty: 'advanced',
+            duration: '1 hr',
+            description:
+              'Agents that navigate and interact with websites — reliability patterns included.',
+            tags: ['browser', 'automation'],
+          },
+          {
+            id: 'computer-use',
+            title: 'Computer Use with Anthropic',
+            url: 'https://www.deeplearning.ai/courses/building-toward-computer-use-with-anthropic/',
+            type: 'course',
+            difficulty: 'advanced',
+            duration: '1 hr',
+            description:
+              'How AI assistants perceive and act on desktop environments.',
+            tags: ['computer-use', 'anthropic'],
+          },
+          {
+            id: 'claude-code',
+            title: 'Claude Code Best Agentic Coding Practices',
+            url: 'https://www.anthropic.com/engineering/claude-code-best-practices',
+            type: 'guide',
+            difficulty: 'advanced',
+            description:
+              'Context engineering, CLAUDE.md, skills, verification loops, and permission modes.',
+            tags: ['coding-agents', 'anthropic', 'best-practices'],
+          },
+        ],
+      },
+      {
+        id: 'p5',
+        title: 'Production AI engineering books',
+        objective: 'Deepen with practitioner-authored guides for shipping agent systems.',
+        resources: [
+          {
+            id: 'ai-agents-definitive',
+            title: 'AI Agents: The Definitive Guide',
+            url: 'https://www.oreilly.com/library/view/ai-agents-the/0642572247775/',
+            type: 'book',
+            difficulty: 'advanced',
+            description:
+              'Nicole Koenigstein: production agent design, tool integration, safety, and scaling.',
+            tags: ['production', 'architecture', 'security'],
+          },
+          {
+            id: 'building-apps-agents',
+            title: 'Building Applications with AI Agents',
+            url: 'https://www.oreilly.com/library/view/building-applications-with/9781098176495/',
+            type: 'book',
+            difficulty: 'advanced',
+            description:
+              'Michael Albada: single- and multi-agent design patterns from concept to deployment.',
+            tags: ['multi-agent', 'design-patterns'],
+          },
+          {
+            id: 'ai-engineering',
+            title: 'AI Engineering',
+            url: 'https://www.oreilly.com/library/view/ai-engineering/9781098166298/',
+            type: 'book',
+            difficulty: 'advanced',
+            description:
+              'Chip Huyen on foundation models, use cases, adaptation, evaluation, and deployment.',
+            tags: ['engineering', 'foundation-models', 'production'],
+          },
+          {
+            id: 'jam-with-ai',
+            title: 'Jam with AI',
+            url: 'https://jamwithai.substack.com/',
+            type: 'newsletter',
+            difficulty: 'advanced',
+            description:
+              'Production-grade AI/ML systems — RAG pipelines, agents, and MLOps from practitioners.',
+            tags: ['production', 'rag', 'mlops'],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'expert-mastery',
+    number: 6,
+    title: 'Expert Mastery',
+    level: 'expert',
+    levelLabel: 'Expert',
+    description:
+      'Multi-agent orchestration, LLMOps at scale, research depth, and system-level thinking.',
+    estimatedWeeks: 'Ongoing',
+    steps: [
+      {
+        id: 'e1',
+        title: 'Multi-agent systems',
+        objective: 'Orchestrate teams of specialized agents for complex workflows.',
+        resources: [
+          {
+            id: 'multi-agent-course',
+            title: 'Multi-Agent Use (crewAI Advanced)',
+            url: 'https://www.deeplearning.ai/courses/practical-multi-ai-agents-and-advanced-use-cases-with-crewai/',
+            type: 'course',
+            difficulty: 'expert',
+            duration: '3 hrs',
+            description:
+              'Parallel, sequential, and hybrid multi-agent setups with performance optimization.',
+            tags: ['multi-agent', 'crewai', 'orchestration'],
+          },
+          {
+            id: 'multi-agent-systems',
+            title: 'Design Multi-Agent Systems with CrewAI',
+            url: 'https://www.deeplearning.ai/courses/design-develop-and-deploy-multi-agent-systems-with-crewai/',
+            type: 'course',
+            difficulty: 'expert',
+            duration: '4 weeks',
+            description:
+              'Production deployment: flows, A2A protocol, observability, CI/CD for agents.',
+            tags: ['multi-agent', 'production', 'crewai'],
+          },
+          {
+            id: 'multi-agent-dl',
+            title: 'Multi Agent Systems (DeepLearning.AI)',
+            url: 'https://www.deeplearning.ai/courses/multi-ai-agent-systems-with-crewai/',
+            type: 'course',
+            difficulty: 'expert',
+            duration: '1.5 hrs',
+            description:
+              'Automate business workflows with multi-agent teams exceeding single-LLM performance.',
+            tags: ['multi-agent', 'workflow'],
+          },
+          {
+            id: 'philo-agents',
+            title: 'Philo Agents (Playlist)',
+            url: 'https://www.youtube.com/playlist?list=PLacQJwuclt_sV-tfZmpT1Ov6jldHl30NR',
+            type: 'video',
+            difficulty: 'expert',
+            description:
+              'Deep philosophical and technical exploration of agent architectures and cognition.',
+            tags: ['theory', 'philosophy', 'advanced'],
+          },
+        ],
+      },
+      {
+        id: 'e2',
+        title: 'LLMOps & production reliability',
+        objective: 'Operate LLM systems with CI, monitoring, and automated testing.',
+        resources: [
+          {
+            id: 'llmops',
+            title: 'LLMOps',
+            url: 'https://www.deeplearning.ai/courses/llmops/',
+            type: 'course',
+            difficulty: 'advanced',
+            duration: '1.5 hrs',
+            description:
+              'Fine-tune and deploy LLMs on Google Cloud with automated MLOps pipelines.',
+            tags: ['llmops', 'deployment', 'gcp'],
+          },
+          {
+            id: 'automated-testing',
+            title: 'Automated Testing for LLMOps',
+            url: 'https://www.deeplearning.ai/courses/automated-testing-llmops/',
+            type: 'course',
+            difficulty: 'advanced',
+            duration: '1 hr',
+            description:
+              'CI workflows with rules-based and model-graded evals using CircleCI.',
+            tags: ['testing', 'ci', 'llmops'],
+          },
+        ],
+      },
+      {
+        id: 'e3',
+        title: 'Research frontier & community',
+        objective: 'Stay at the cutting edge through papers, playlists, and expert voices.',
+        resources: [
+          {
+            id: 'neosage',
+            title: 'NeoSage',
+            url: 'https://blog.neosage.io/',
+            type: 'newsletter',
+            difficulty: 'expert',
+            description:
+              'Shivani’s blog on advanced AI research, agents, and emerging paradigms.',
+            tags: ['research', 'frontier'],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'ai-news-radar',
+    number: 7,
+    title: 'AI News Radar',
+    level: 'intermediate',
+    levelLabel: 'Ongoing',
+    description:
+      'Stay current with the AI landscape and turn every headline into a deliberate learning action — powered by GetStream\'s awesome-ai-news.',
+    estimatedWeeks: '30 min/week',
+    steps: [
+      {
+        id: 'n1',
+        title: 'Your monthly news hub',
+        objective:
+          'Establish a repeatable ritual to scan AI news without drowning in hype.',
+        resources: [
+          {
+            id: 'awesome-ai-news',
+            title: 'Awesome AI News (GetStream)',
+            url: 'https://github.com/GetStream/awesome-ai-news',
+            type: 'repo',
+            difficulty: 'beginner',
+            duration: '15 min/month',
+            description:
+              'Monthly curated AI news for developers — models, agents, voice, vision, tools. Check the README each month.',
+            tags: ['news', 'curated', 'monthly', 'getstream'],
+          },
+          {
+            id: 'karpathy-software-changing',
+            title: 'Software Is Changing (Again) — Andrej Karpathy',
+            url: 'https://www.youtube.com/watch?v=LCEmiRjPEtQ',
+            type: 'video',
+            difficulty: 'intermediate',
+            duration: '39 min',
+            description:
+              'Software 3.0 keynote: LLMs as a new computing paradigm, build-for-agents, and the decade of partial autonomy.',
+            tags: ['software-3.0', 'agents', 'strategy', 'karpathy'],
+          },
+        ],
+      },
+      {
+        id: 'n2',
+        title: 'Agent infrastructure standards',
+        objective:
+          'Understand the emerging standards your team and tools will converge on.',
+        resources: [
+          {
+            id: 'agents-md',
+            title: 'AGENTS.md Standard',
+            url: 'https://agents.md/',
+            type: 'guide',
+            difficulty: 'intermediate',
+            description:
+              'Cross-tool standard for AI agent instructions — read by Codex, Cursor, Copilot, Windsurf, and more.',
+            tags: ['standards', 'coding-agents', 'documentation'],
+          },
+          {
+            id: 'google-adk',
+            title: 'Google Agent Development Kit (ADK)',
+            url: 'https://google.github.io/adk-docs/',
+            type: 'guide',
+            difficulty: 'intermediate',
+            description:
+              'Google\'s open-source toolkit for building, evaluating, and deploying agents — pairs with Gemini.',
+            tags: ['google', 'agents', 'framework', 'adk'],
+          },
+          {
+            id: 'openai-agent-builder',
+            title: 'OpenAI Agents Guide & Builder',
+            url: 'https://platform.openai.com/docs/guides/agents',
+            type: 'guide',
+            difficulty: 'intermediate',
+            description:
+              'OpenAI\'s agent documentation — Agent Builder, SDK, guardrails, and orchestration patterns.',
+            tags: ['openai', 'agents', 'sdk'],
+          },
+        ],
+      },
+      {
+        id: 'n3',
+        title: 'Emerging modalities from the news',
+        objective:
+          'Voice and vision agents are dominating headlines — know where to go deep.',
+        resources: [
+          {
+            id: 'voice-agents-course',
+            title: 'Building AI Voice Agents for Production',
+            url: 'https://www.deeplearning.ai/courses/building-ai-voice-agents-for-production/',
+            type: 'course',
+            difficulty: 'advanced',
+            duration: '1 hr',
+            description:
+              'Responsive, scalable voice AI — directly relevant to gpt-realtime, Grok Voice, and Gemini Live news.',
+            tags: ['voice', 'realtime', 'production'],
+          },
+          {
+            id: 'vision-agents',
+            title: 'Vision Agents (GetStream)',
+            url: 'https://github.com/GetStream/Vision-Agents',
+            type: 'repo',
+            difficulty: 'advanced',
+            description:
+              'Open-source framework for real-time voice + video AI agents — from the same team as awesome-ai-news.',
+            tags: ['vision', 'voice', 'realtime', 'multimodal'],
+          },
+        ],
+      },
+    ],
+  },
+]
+
+export const PATH_STATS = {
+  totalPhases: LEARNING_PATH.length,
+  totalSteps: LEARNING_PATH.reduce((n, p) => n + p.steps.length, 0),
+  totalResources: LEARNING_PATH.reduce(
+    (n, p) => n + p.steps.reduce((s, step) => s + step.resources.length, 0),
+    0,
+  ),
+}

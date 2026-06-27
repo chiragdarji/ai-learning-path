@@ -1,0 +1,92 @@
+# AI Learning Path
+
+A curated, persona-aware curriculum for AI engineering — from LLM basics to production agents, with a monthly news radar powered by [awesome-ai-news](https://github.com/GetStream/awesome-ai-news).
+
+**Live app:** _Deploy via Vercel (see below)_
+
+## Features
+
+- 7 phases, ~65 resources (videos, courses, repos, books, papers, guides)
+- **Manager track** — essential resources for engineering leaders
+- **Full track** — beginner → expert path
+- **AI News Radar** — map headlines to curriculum learning actions
+- **Progress tracking** — localStorage with export/import JSON
+- **Shareable URLs** — `/phase/agent-foundations`, `/news-radar`
+
+## Local development
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173)
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build → `dist/` |
+| `npm run preview` | Serve production build locally |
+| `npm run lint` | Run Oxlint |
+
+## Routes
+
+| URL | Page |
+|-----|------|
+| `/` | Roadmap overview |
+| `/news-radar` | AI News Radar |
+| `/phase/:phaseId` | Phase detail (e.g. `/phase/llm-fundamentals`) |
+
+## Progress export / import
+
+1. Click **Export** in the top bar → downloads `ai-learning-path-progress-YYYY-MM-DD.json`
+2. On another device, click **Import** and select the file (merges with existing progress)
+3. **Reset** clears all checkmarks
+
+## Deploy to Vercel (recommended)
+
+1. Push this repo to GitHub
+2. Go to [vercel.com](https://vercel.com) → **Add New Project** → import the repo
+3. Vercel auto-detects Vite; `vercel.json` handles SPA routing
+4. Deploy — you get a `*.vercel.app` URL with HTTPS
+
+Build settings (auto-detected):
+
+- **Build command:** `npm run build`
+- **Output directory:** `dist`
+
+## Deploy to Netlify
+
+1. Import repo at [netlify.com](https://netlify.com)
+2. `netlify.toml` configures build and SPA redirects
+3. Deploy
+
+## Custom domain
+
+After deploying on Vercel or Netlify:
+
+1. Add your domain in the host dashboard
+2. Update DNS per host instructions (usually a CNAME)
+3. HTTPS is provisioned automatically
+
+## CI
+
+GitHub Actions runs on every push/PR to `main`:
+
+- `npm run lint`
+- `npm run build`
+
+See [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
+
+## Project docs
+
+- [North Star Vision](docs/NORTHSTAR-VISION.md) — production roadmap and task checklist
+
+## Tech stack
+
+- React 19 + TypeScript
+- Vite 8
+- React Router 7
+- Oxlint
