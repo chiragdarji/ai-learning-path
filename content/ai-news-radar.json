@@ -1,0 +1,286 @@
+{
+  "awesomeAiNews": {
+    "title": "Awesome AI News (GetStream)",
+    "url": "https://github.com/GetStream/awesome-ai-news",
+    "description": "Monthly curated AI news for developers — model releases, agent tools, voice/vision SDKs, and frameworks. Your primary radar for what changed this month.",
+    "updateCadence": "Check the 1st Monday of each month (~15 min)"
+  },
+  "monthlyRitual": [
+    {
+      "step": 1,
+      "title": "Scan the latest month",
+      "detail": "Open awesome-ai-news and read the current month section top-to-bottom."
+    },
+    {
+      "step": 2,
+      "title": "Tag each headline",
+      "detail": "Match headlines to a theme below (agents, voice, coding, models, RAG, multi-agent). Ignore pure product launches unless your team uses them."
+    },
+    {
+      "step": 3,
+      "title": "Pick one learning action",
+      "detail": "Choose 1 headline → 1 curriculum resource to study or assign to your team that week."
+    },
+    {
+      "step": 4,
+      "title": "Discuss in staff meeting",
+      "detail": "Share one insight: \"This news means we should / shouldn't …\" using the manager action prompts."
+    }
+  ],
+  "learningBridges": [
+    {
+      "id": "agent-frameworks",
+      "theme": "Agent Frameworks & SDKs",
+      "icon": "⬡",
+      "newsSignal": "New agent frameworks, Agent SDKs, \"agentic IDE\" launches, Eve/Flue/Open Agents",
+      "recentExamples": [
+        "Eve by Vercel — agent framework like Next.js for agents",
+        "Claude Agent SDK in Xcode 26.3",
+        "OpenAI Agent Builder & Frontier platform",
+        "Open Agents — cloud coding agents",
+        "Agent Skills Launch Party (Anthropic)"
+      ],
+      "managerAction": "Ask: Is this a framework our team should standardize on, or noise? Compare against Anthropic's \"start with workflows\" principle.",
+      "phaseId": "agent-foundations",
+      "phaseTitle": "Agent Foundations",
+      "curriculumResourceIds": [
+        "anthropic-agents",
+        "openai-agents",
+        "ms-agents",
+        "agent-design-patterns"
+      ],
+      "phase7ResourceIds": [
+        "google-adk",
+        "openai-agent-builder",
+        "agents-md"
+      ]
+    },
+    {
+      "id": "coding-agents",
+      "theme": "Coding & Dev Agents",
+      "icon": "⌘",
+      "newsSignal": "Codex, Claude Code, Cursor, Copilot CLI, agentic coding in Xcode/VS Code",
+      "recentExamples": [
+        "Codex OSS Mode — use any open-source model",
+        "Cursor Composer 2.5 / Cursor 3",
+        "GitHub Copilot App technical preview",
+        "Agentic Coding in Xcode",
+        "Karpathy joins Anthropic"
+      ],
+      "managerAction": "Define team standards: AGENTS.md, eval harness, and when agents get write access. Measure productivity, not just adoption.",
+      "phaseId": "production-agents",
+      "phaseTitle": "Building Production Agents",
+      "curriculumResourceIds": [
+        "claude-code",
+        "eval-agents",
+        "build-eval-video"
+      ],
+      "phase7ResourceIds": [
+        "karpathy-software-changing",
+        "agents-md"
+      ]
+    },
+    {
+      "id": "mcp-protocols",
+      "theme": "MCP & Agent Protocols",
+      "icon": "🔗",
+      "newsSignal": "MCP servers, Agent Skills, A2A protocol, openresponses.org, UCP commerce",
+      "recentExamples": [
+        "Claude Code Marketplace",
+        "OpenAI + Stripe Agentic Commerce Protocol",
+        "Agentic AI Foundation (Anthropic + OpenAI)",
+        "openresponses.org — multi-provider LLM spec"
+      ],
+      "managerAction": "Treat MCP as your team's USB-C for tools — standardize tool interfaces before multiplying agents.",
+      "phaseId": "production-agents",
+      "phaseTitle": "Building Production Agents",
+      "curriculumResourceIds": [
+        "mcp-course",
+        "mcp-book",
+        "mcp-video"
+      ],
+      "phase7ResourceIds": [
+        "agents-md"
+      ]
+    },
+    {
+      "id": "voice-ai",
+      "theme": "Voice & Realtime AI",
+      "icon": "🎙",
+      "newsSignal": "gpt-realtime, Grok Voice, Deepgram Flux, ElevenLabs agents, Gemini Live",
+      "recentExamples": [
+        "GPT-Realtime-2 & Translate API",
+        "Deepgram Flux Multilingual for voice agents",
+        "Gemini 3.1 Flash Live — realtime voice/vision",
+        "MoshiRAG — async retrieval for speech models",
+        "Chroma 1.0 — open-source speech-to-speech"
+      ],
+      "managerAction": "Voice agents need latency budgets + eval metrics different from text. Pilot one use case before platform bet.",
+      "phaseId": "production-agents",
+      "phaseTitle": "Building Production Agents",
+      "curriculumResourceIds": [
+        "browser-agents",
+        "computer-use"
+      ],
+      "phase7ResourceIds": [
+        "voice-agents-course",
+        "vision-agents"
+      ]
+    },
+    {
+      "id": "model-releases",
+      "theme": "Model Releases & Selection",
+      "icon": "◈",
+      "newsSignal": "GPT-5.x, Claude Opus/Sonnet, Gemini 3.x, Qwen, DeepSeek, open-weight models",
+      "recentExamples": [
+        "Claude Opus 4.7 / Sonnet 4.6",
+        "Gemini 3.5 Live Translate",
+        "DeepSeek v4 family",
+        "Qwen3.7-Max-Preview",
+        "Ollama + local model support for Codex/Claude Code"
+      ],
+      "managerAction": "Don't chase every release. Ask: does this change our cost/latency/quality tradeoff for a specific use case?",
+      "phaseId": "llm-fundamentals",
+      "phaseTitle": "LLM Fundamentals",
+      "curriculumResourceIds": [
+        "llm-intro-video",
+        "prompt-guide",
+        "improve-accuracy"
+      ],
+      "phase7ResourceIds": [
+        "karpathy-software-changing"
+      ]
+    },
+    {
+      "id": "rag-retrieval",
+      "theme": "RAG & Knowledge Retrieval",
+      "icon": "🔍",
+      "newsSignal": "Built-in RAG, agentic RAG, vector search, file search in APIs",
+      "recentExamples": [
+        "Gemini Built-In RAG: File Search in the API",
+        "MoshiRAG — async knowledge for speech LLMs",
+        "Vision Agents RAG + File Search plugins",
+        "Google Code Wiki — auto architecture diagrams"
+      ],
+      "managerAction": "News often announces features — your team still needs eval pipelines. Require retrieval benchmarks before production.",
+      "phaseId": "applied-llm",
+      "phaseTitle": "Applied LLM Engineering",
+      "curriculumResourceIds": [
+        "advanced-rag",
+        "vector-db-pinecone",
+        "rag-survey"
+      ],
+      "phase7ResourceIds": [
+        "vision-agents"
+      ]
+    },
+    {
+      "id": "multi-agent",
+      "theme": "Multi-Agent & Orchestration",
+      "icon": "⬢",
+      "newsSignal": "Agent swarms, multi-agent crews, RalphTUI loops, managed cloud agents",
+      "recentExamples": [
+        "Kimi K2.5 — Agent Swarm coding",
+        "Managed Antigravity Agents in Gemini API",
+        "RalphTUI — AI Agent Loop Orchestrator",
+        "Design Multi-Agent Systems with CrewAI course"
+      ],
+      "managerAction": "Multi-agent adds coordination cost. Require proof that single-agent + workflow failed first.",
+      "phaseId": "expert-mastery",
+      "phaseTitle": "Expert Mastery",
+      "curriculumResourceIds": [
+        "multi-agent-systems",
+        "multi-agent-course",
+        "google-companion"
+      ],
+      "phase7ResourceIds": []
+    },
+    {
+      "id": "enterprise-llmops",
+      "theme": "Enterprise & LLMOps",
+      "icon": "🏗",
+      "newsSignal": "OpenAI Frontier, enterprise platforms, observability, automated testing",
+      "recentExamples": [
+        "OpenAI Frontier — enterprise AI coworkers",
+        "VS Code OpenTelemetry tracing for agents",
+        "Zoom Federated AI",
+        "Automated Testing for LLMOps (CircleCI)"
+      ],
+      "managerAction": "Platform news ≠ production readiness. Insist on CI evals, guardrails, and cost monitoring before enterprise rollout.",
+      "phaseId": "expert-mastery",
+      "phaseTitle": "Expert Mastery",
+      "curriculumResourceIds": [
+        "llmops",
+        "automated-testing",
+        "ai-engineering"
+      ],
+      "phase7ResourceIds": []
+    }
+  ],
+  "recentHighlights": [
+    {
+      "id": "h1",
+      "headline": "Eve by Vercel — agent framework like Next.js for agents",
+      "month": "June 2026",
+      "themeId": "agent-frameworks",
+      "learningAction": "Read Anthropic Building Effective Agents — compare framework vs workflow",
+      "phaseId": "agent-foundations"
+    },
+    {
+      "id": "h2",
+      "headline": "Codex OSS Mode — use any open-source model with Codex",
+      "month": "June 2026",
+      "themeId": "coding-agents",
+      "learningAction": "Review Claude Code best practices + eval-agents course",
+      "phaseId": "production-agents"
+    },
+    {
+      "id": "h3",
+      "headline": "Gemini 3.5 Live Translate",
+      "month": "June 2026",
+      "themeId": "voice-ai",
+      "learningAction": "Explore voice agents course + Vision Agents framework",
+      "phaseId": "ai-news-radar"
+    },
+    {
+      "id": "h4",
+      "headline": "Managed Antigravity Agents in Gemini API",
+      "month": "May 2026",
+      "themeId": "multi-agent",
+      "learningAction": "Study Google Agent Companion whitepaper on multi-agent eval",
+      "phaseId": "agent-foundations"
+    },
+    {
+      "id": "h5",
+      "headline": "Andrej Karpathy joins Anthropic",
+      "month": "May 2026",
+      "themeId": "coding-agents",
+      "learningAction": "Watch \"Software Is Changing (Again)\" — Software 3.0 framework",
+      "phaseId": "ai-news-radar"
+    },
+    {
+      "id": "h6",
+      "headline": "Gemini Built-In RAG: File Search in the API",
+      "month": "November 2025",
+      "themeId": "rag-retrieval",
+      "learningAction": "Complete Building and Evaluating Advanced RAG course",
+      "phaseId": "applied-llm"
+    },
+    {
+      "id": "h7",
+      "headline": "OpenAI Agent Builder & Agent SDK",
+      "month": "October 2025",
+      "themeId": "agent-frameworks",
+      "learningAction": "Read OpenAI Practical Guide + try Agent Builder docs",
+      "phaseId": "agent-foundations"
+    },
+    {
+      "id": "h8",
+      "headline": "Agentic AI Foundation — Anthropic + OpenAI",
+      "month": "December 2025",
+      "themeId": "mcp-protocols",
+      "learningAction": "Read agents.md standard + MCP course",
+      "phaseId": "production-agents"
+    }
+  ]
+}

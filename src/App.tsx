@@ -19,6 +19,7 @@ import { PersonaBanner } from './components/PersonaBanner'
 import { Sidebar } from './components/Sidebar'
 import { useProgress } from './hooks/useProgress'
 import { usePersona } from './hooks/usePersona'
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, usePageMeta } from './hooks/usePageMeta'
 import type { Phase } from './types'
 import { getResourcePriority } from './data/personas'
 
@@ -143,6 +144,7 @@ interface OutletContext {
 function OverviewPage() {
   const { personaId, isComplete } = useOutletContext<OutletContext>()
   const navigate = useNavigate()
+  usePageMeta(DEFAULT_TITLE, DEFAULT_DESCRIPTION, '/')
 
   return (
     <Overview
@@ -157,6 +159,11 @@ function OverviewPage() {
 function NewsRadarPage() {
   const { isComplete } = useOutletContext<OutletContext>()
   const navigate = useNavigate()
+  usePageMeta(
+    'AI News Radar',
+    'Monthly AI news themes mapped to curriculum learning actions for engineering leaders.',
+    '/news-radar',
+  )
 
   return (
     <NewsRadarView
@@ -172,6 +179,12 @@ function PhasePage() {
     useOutletContext<OutletContext>()
 
   const phase = LEARNING_PATH.find((p) => p.id === phaseId)
+
+  usePageMeta(
+    phase?.title ?? 'Phase',
+    phase?.description ?? DEFAULT_DESCRIPTION,
+    phaseId ? `/phase/${phaseId}` : '/',
+  )
 
   if (!phase) {
     return <Navigate to="/" replace />

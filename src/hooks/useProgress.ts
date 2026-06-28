@@ -3,16 +3,21 @@ import { downloadProgress, parseProgressFile } from '../utils/progressExport'
 
 const STORAGE_KEY = 'ai-learning-path-progress'
 
+function readStoredProgress(): Set<string> {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (raw) return new Set(JSON.parse(raw) as string[])
+  } catch {
+    /* ignore corrupt storage */
+  }
+  return new Set()
+}
+
 export function useProgress() {
-  const [completed, setCompleted] = useState<Set<string>>(() => new Set())
+  const [completed, setCompleted] = useState<Set<string>>(readStoredProgress)
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) setCompleted(new Set(JSON.parse(raw) as string[]))
-    } catch {
-      /* ignore corrupt storage */
-    }
+    setCompleted(readStoredProgress())
   }, [])
 
   const persist = useCallback((next: Set<string>) => {
@@ -22,15 +27,21 @@ export function useProgress() {
 
   const toggle = useCallback(
     (id: string) => {
-      const next = new Set(completed)
-      if (next.has(id)) next.delete(id)
-      else next.add(id)
-      persist(next)
+      setCompleted((prev) => {
+        const next = new Set(prev)
+        if (next.has(id)) next.delete(id)
+        else next.add(id)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([...next]))
+        return next
+      })
     },
-    [completed, persist],
+    [],
   )
 
-  const isComplete = useCallback((id: string) => completed.has(id), [completed])
+  const isComplete = useCallback(
+    (id: string) => completed.has(id),
+    [completed],
+  )
 
   const reset = useCallback(() => persist(new Set()), [persist])
 

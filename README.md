@@ -2,7 +2,7 @@
 
 A curated, persona-aware curriculum for AI engineering — from LLM basics to production agents, with a monthly news radar powered by [awesome-ai-news](https://github.com/GetStream/awesome-ai-news).
 
-**Live app:** _Deploy via Vercel (see below)_
+**Live app:** [https://www.vidyanix.ai](https://www.vidyanix.ai)
 
 ## Features
 
@@ -27,9 +27,26 @@ Open [http://localhost:5173](http://localhost:5173)
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Start dev server |
-| `npm run build` | Production build → `dist/` |
+| `npm run build` | Validate content, generate sitemap, production build → `dist/` |
 | `npm run preview` | Serve production build locally |
 | `npm run lint` | Run Oxlint |
+| `npm run test` | Unit tests (Vitest) |
+| `npm run test:e2e` | End-to-end tests (Playwright) |
+| `npm run validate:content` | Zod validation + unique resource IDs |
+| `npm run check:links` | HEAD-check all resource URLs |
+| `npm run content:extract` | Regenerate JSON from TS (legacy migration helper) |
+
+## Editing curriculum content
+
+Content lives in JSON under `content/`:
+
+| File | Contents |
+|------|----------|
+| `content/learning-path.json` | Phases, steps, resources |
+| `content/personas.json` | Manager / Full track priorities |
+| `content/ai-news-radar.json` | News bridges and highlights |
+
+Run `npm run validate:content` after edits. CI runs this on every PR.
 
 ## Routes
 
@@ -75,8 +92,13 @@ After deploying on Vercel or Netlify:
 
 GitHub Actions runs on every push/PR to `main`:
 
+- `npm run validate:content`
 - `npm run lint`
+- `npm run test`
 - `npm run build`
+- `npm run test:e2e`
+
+A weekly workflow also runs `npm run check:links` and opens a GitHub issue if URLs are broken.
 
 See [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
 
@@ -84,9 +106,15 @@ See [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
 
 - [North Star Vision](docs/NORTHSTAR-VISION.md) — production roadmap and task checklist
 
+## Optional analytics
+
+Set `VITE_PLAUSIBLE_DOMAIN=vidyanix.ai` in Vercel environment variables to enable [Plausible](https://plausible.io) page views.
+
 ## Tech stack
 
 - React 19 + TypeScript
 - Vite 8
 - React Router 7
+- Zod (content validation)
+- Vitest + Playwright
 - Oxlint

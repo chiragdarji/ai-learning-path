@@ -18,31 +18,34 @@
 | Layer | Status | Notes |
 |-------|--------|-------|
 | **UI** | ✅ Done | React SPA — 7 phases, Manager/Full personas, AI News Radar |
-| **Content** | ✅ Done | ~65 resources in `learningPath.ts`, personas in `personas.ts`, news bridges in `aiNewsRadar.ts` |
+| **Content** | ✅ JSON | ~65 resources in `content/*.json` with Zod validation at build |
 | **Progress** | ⚠️ Local only | Checkbox per resource → `localStorage` key `ai-learning-path-progress` |
 | **Persona** | ⚠️ Local only | Stored in `localStorage` key `ai-learning-path-persona` |
-| **Routing** | ✅ Done | React Router — `/`, `/news-radar`, `/phase/:id` |
-| **Hosting** | ⚠️ Ready | `vercel.json` + `netlify.toml`; deploy pending |
-| **CI/CD** | ✅ Done | GitHub Actions lint + build on PR |
-| **Tests** | ❌ Missing | No unit or E2E tests |
 | **Backend** | ❌ None | No auth, sync, or CMS |
-| **SEO** | ⚠️ Minimal | Single static title/description |
-| **Link health** | ❌ None | ~65 external URLs unchecked |
-| **Analytics** | ❌ None | No usage or error tracking |
+| **Routing** | ✅ Done | React Router — `/`, `/news-radar`, `/phase/:id` |
+| **Hosting** | ✅ Done | Live at vidyanix.ai via Vercel |
+| **CI/CD** | ✅ Done | GitHub Actions lint + test + build + E2E |
+| **Tests** | ✅ Done | Vitest unit tests + Playwright E2E |
+| **Link health** | ✅ CI | Weekly link-check workflow |
+| **SEO** | ✅ Basic | OG tags, sitemap.xml, robots.txt |
+| **Analytics** | ⚠️ Optional | Plausible via `VITE_PLAUSIBLE_DOMAIN` |
+| **Error tracking** | ❌ None | Sentry not configured (B11 deferred) |
 
 ### Tech stack today
 
 - Vite 8 + React 19 + TypeScript
 - Static build → `dist/`
-- Oxlint (no test runner)
+- Oxlint + Vitest + Playwright
+- Zod content validation
 
 ### Key files
 
 | File | Purpose |
 |------|---------|
-| `src/data/learningPath.ts` | Phases, steps, resources |
-| `src/data/personas.ts` | Manager vs Full track priorities |
-| `src/data/aiNewsRadar.ts` | News themes, learning bridges, highlights |
+| `content/learning-path.json` | Phases, steps, resources |
+| `content/personas.json` | Manager vs Full track priorities |
+| `content/ai-news-radar.json` | News themes, learning bridges, highlights |
+| `src/schemas/content.ts` | Zod schemas + validation helpers |
 | `src/hooks/useProgress.ts` | localStorage progress |
 | `src/hooks/usePersona.ts` | localStorage persona |
 
@@ -68,14 +71,14 @@
 
 | # | Task | Details | Done |
 |---|------|---------|------|
-| A1 | Deploy to Vercel or Netlify | Connect GitHub repo; build command `npm run build`; output `dist/` | ☐ (you deploy) |
-| A2 | Custom domain + HTTPS | Configure DNS; enable automatic TLS | ☐ (you configure) |
+| A1 | Deploy to Vercel or Netlify | Connect GitHub repo; build command `npm run build`; output `dist/` | ☑ |
+| A2 | Custom domain + HTTPS | Configure DNS; enable automatic TLS | ☑ |
 | A3 | Add React Router | Routes: `/`, `/news-radar`, `/phase/:phaseId` | ☑ |
 | A4 | SPA fallback config | Rewrite all routes to `index.html` (Vercel/Netlify config) | ☑ |
 | A5 | Export progress | Download completed resource IDs as JSON file | ☑ |
 | A6 | Import progress | Upload/merge JSON to restore progress on new device | ☑ |
-| A7 | GitHub Actions — CI | On PR: `npm run lint` + `npm run build` | ☑ |
-| A8 | GitHub Actions — deploy | On merge to main: deploy preview/production | ☐ (use Vercel Git integration) |
+| A7 | GitHub Actions — CI | On PR: lint + test + build + E2E | ☑ |
+| A8 | GitHub Actions — deploy | On merge to main: deploy preview/production | ☑ (Vercel Git integration) |
 | A9 | README — run & deploy | Document local dev, build, and deploy steps | ☑ |
 
 **Exit criteria:** Live URL works; shared phase links work; progress export/import works; CI green on every PR.
@@ -90,19 +93,19 @@
 
 | # | Task | Details | Done |
 |---|------|---------|------|
-| B1 | Extract content to JSON | Move phases/resources out of TS into `content/` JSON files | ☐ |
-| B2 | Zod schema validation | Validate JSON at build time; fail CI on bad content | ☐ |
-| B3 | Resource ID uniqueness check | Script/assert no duplicate IDs across phases | ☐ |
-| B4 | Link checker script | Node script: HEAD request all resource URLs | ☐ |
-| B5 | Weekly link-check CI | Scheduled GitHub Action; open issue on failures | ☐ |
-| B6 | Unit tests — progress | Test toggle, persist, reset, import/export merge | ☐ |
-| B7 | Unit tests — personas | Test priority mapping, essential counts | ☐ |
-| B8 | E2E tests — Playwright | Load app, check resource, refresh, progress persists | ☐ |
-| B9 | Error boundary | Graceful UI fallback on React crashes | ☐ |
-| B10 | Analytics — Plausible or Umami | Privacy-friendly page views; no cookie banner if chosen carefully | ☐ |
+| B1 | Extract content to JSON | Move phases/resources out of TS into `content/` JSON files | ☑ |
+| B2 | Zod schema validation | Validate JSON at build time; fail CI on bad content | ☑ |
+| B3 | Resource ID uniqueness check | Script/assert no duplicate IDs across phases | ☑ |
+| B4 | Link checker script | Node script: HEAD request all resource URLs | ☑ |
+| B5 | Weekly link-check CI | Scheduled GitHub Action; open issue on failures | ☑ |
+| B6 | Unit tests — progress | Test toggle, persist, reset, import/export merge | ☑ |
+| B7 | Unit tests — personas | Test priority mapping, essential counts | ☑ |
+| B8 | E2E tests — Playwright | Load app, check resource, refresh, progress persists | ☑ |
+| B9 | Error boundary | Graceful UI fallback on React crashes | ☑ |
+| B10 | Analytics — Plausible or Umami | Privacy-friendly page views; no cookie banner if chosen carefully | ☑ (optional env) |
 | B11 | Error tracking — Sentry | Capture runtime errors in production | ☐ |
-| B12 | Open Graph meta tags | Per-route title/description for sharing | ☐ |
-| B13 | `sitemap.xml` + `robots.txt` | Basic SEO for public routes | ☐ |
+| B12 | Open Graph meta tags | Per-route title/description for sharing | ☑ |
+| B13 | `sitemap.xml` + `robots.txt` | Basic SEO for public routes | ☑ |
 
 **Exit criteria:** Content edits via JSON PRs; broken links caught automatically; core flows covered by tests; errors visible in Sentry.
 
@@ -291,6 +294,10 @@ npm run preview      # serve dist locally
 
 # Quality
 npm run lint
+npm run validate:content
+npm run test
+npm run test:e2e
+npm run check:links
 ```
 
 ---

@@ -1393,3 +1393,28 @@ a:hover {
     padding: 1.5rem 1rem 3rem;
   }
 }
+
+.error-fallback {
+  max-width: 32rem;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-fallback h1 {
+  margin-bottom: 0.75rem;
+}
+
+.error-fallback p {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.error-fallback button {
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  font-family: inherit;
+}
