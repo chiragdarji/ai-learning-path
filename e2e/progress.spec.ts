@@ -25,3 +25,9 @@ test('news radar route loads', async ({ page }) => {
   await page.goto('/news-radar')
   await expect(page.getByRole('heading', { name: /AI News Radar/i })).toBeVisible()
 })
+
+test('search route loads with filters', async ({ page }) => {
+  await page.goto('/search')
+  await expect(page.getByRole('heading', { name: /Search resources/i })).toBeVisible()
+  await expect(page.getByRole('searchbox')).toBeVisible()
+})

@@ -10,8 +10,9 @@ A curated, persona-aware curriculum for AI engineering — from LLM basics to pr
 - **Manager track** — essential resources for engineering leaders
 - **Full track** — beginner → expert path
 - **AI News Radar** — map headlines to curriculum learning actions
-- **Progress tracking** — localStorage with export/import JSON
-- **Shareable URLs** — `/phase/agent-foundations`, `/news-radar`
+- **Progress tracking** — localStorage with export/import JSON; optional cloud sync via Supabase
+- **Search & filters** — `/search` across all resources by type and difficulty
+- **Shareable URLs** — `/phase/agent-foundations`, `/news-radar`, `/privacy`
 
 ## Local development
 
@@ -36,6 +37,14 @@ Open [http://localhost:5173](http://localhost:5173)
 | `npm run check:links` | HEAD-check all resource URLs |
 | `npm run content:extract` | Regenerate JSON from TS (legacy migration helper) |
 
+Sync news drafts from awesome-ai-news:
+
+```bash
+npx tsx scripts/sync-news-highlights.ts
+```
+
+Review `content/news-highlights-draft.json` before merging into `content/ai-news-radar.json`.
+
 ## Editing curriculum content
 
 Content lives in JSON under `content/`:
@@ -53,8 +62,31 @@ Run `npm run validate:content` after edits. CI runs this on every PR.
 | URL | Page |
 |-----|------|
 | `/` | Roadmap overview |
+| `/search` | Search & filter all resources |
 | `/news-radar` | AI News Radar |
+| `/privacy` | Privacy policy |
 | `/phase/:phaseId` | Phase detail (e.g. `/phase/llm-fundamentals`) |
+
+## Cloud sync (Supabase — optional)
+
+Without Supabase env vars the app works fully offline with localStorage only.
+
+1. Create a [Supabase](https://supabase.com) project
+2. Run the migration:
+   ```bash
+   npm run migrate:supabase
+   ```
+   Requires `SUPABASE_DB_PASSWORD` in `.env` (Dashboard → **Settings → Database** → database password).
+   Or paste `supabase/migrations/001_phase_c.sql` into the [SQL Editor](https://supabase.com/dashboard/project/_/sql/new).
+3. Enable **Google** auth (and/or email) under Authentication → Providers
+4. Add redirect URL: `https://www.vidyanix.ai` (and `http://localhost:5173` for dev)
+5. Copy to `.env` (see `.env.example`):
+   - `SUPABASE_URL`
+   - `SUPABASE_PUBLISHABLE_KEY`
+   - Keep `SUPABASE_SECRET_KEY` and `SUPABASE_JWKS_URL` server-side only — they are **not** bundled into the app
+6. Add `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` in Vercel → Settings → Environment Variables
+
+On sign-in, local progress merges with cloud and syncs both ways.
 
 ## Progress export / import
 
@@ -115,6 +147,8 @@ Set `VITE_PLAUSIBLE_DOMAIN=vidyanix.ai` in Vercel environment variables to enabl
 - React 19 + TypeScript
 - Vite 8
 - React Router 7
+- Supabase (optional auth + progress sync)
+- Fuse.js (search)
 - Zod (content validation)
 - Vitest + Playwright
 - Oxlint

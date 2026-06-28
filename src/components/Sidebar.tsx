@@ -42,6 +42,17 @@ export function Sidebar({ personaId, completedCount, totalCount }: SidebarProps)
       </NavLink>
 
       <NavLink
+        to="/search"
+        className={({ isActive }) => `nav-item search ${isActive ? 'active' : ''}`}
+      >
+        <span className="nav-num">⌕</span>
+        <span className="nav-text">
+          <strong>Search</strong>
+          <small>Filter all resources</small>
+        </span>
+      </NavLink>
+
+      <NavLink
         to="/news-radar"
         className={({ isActive }) => `nav-item news-radar ${isActive ? 'active' : ''}`}
       >
@@ -78,6 +89,12 @@ export function Sidebar({ personaId, completedCount, totalCount }: SidebarProps)
           )
         })}
       </ol>
+
+      <div className="sidebar-footer">
+        <NavLink to="/privacy" className="sidebar-footer-link">
+          Privacy
+        </NavLink>
+      </div>
     </nav>
   )
 }

@@ -1,0 +1,25 @@
+name: Sync News Highlights
+
+on:
+  schedule:
+    - cron: '0 10 1 * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+      - run: npx tsx scripts/sync-news-highlights.ts
+
+      - name: Report draft output
+        run: |
+          echo "Draft highlights written to content/news-highlights-draft.json"
+          echo "Copy reviewed items into content/ai-news-radar.json recentHighlights"

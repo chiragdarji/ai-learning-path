@@ -12,12 +12,16 @@
     "validate:content": "tsx scripts/validate-content.ts",
     "check:links": "tsx scripts/check-links.ts",
     "content:extract": "tsx scripts/extract-content.ts",
+    "migrate:supabase": "tsx scripts/run-supabase-migration.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:install": "playwright install chromium"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.108.2",
+    "fuse.js": "^7.4.2",
+    "postgres": "^3.4.9",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.0",

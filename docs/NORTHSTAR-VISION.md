@@ -19,8 +19,9 @@
 |-------|--------|-------|
 | **UI** | ✅ Done | React SPA — 7 phases, Manager/Full personas, AI News Radar |
 | **Content** | ✅ JSON | ~65 resources in `content/*.json` with Zod validation at build |
-| **Progress** | ⚠️ Local only | Checkbox per resource → `localStorage` key `ai-learning-path-progress` |
-| **Persona** | ⚠️ Local only | Stored in `localStorage` key `ai-learning-path-persona` |
+| **Progress** | ✅ Local + cloud | localStorage; optional Supabase sync when signed in |
+| **Persona** | ✅ Local + cloud | localStorage; optional Supabase sync when signed in |
+| **Search** | ✅ Done | Fuse.js at `/search` with type/difficulty filters |
 | **Backend** | ❌ None | No auth, sync, or CMS |
 | **Routing** | ✅ Done | React Router — `/`, `/news-radar`, `/phase/:id` |
 | **Hosting** | ✅ Done | Live at vidyanix.ai via Vercel |
@@ -119,18 +120,18 @@
 
 | # | Task | Details | Done |
 |---|------|---------|------|
-| C1 | Choose backend — Supabase recommended | Auth + Postgres; minimal custom API | ☐ |
-| C2 | User auth | Email magic link or OAuth (Google/GitHub) | ☐ |
-| C3 | Cloud progress sync | Table: `user_id`, `resource_id`, `completed_at` | ☐ |
-| C4 | Migrate localStorage on login | Merge local progress into cloud on first sign-in | ☐ |
-| C5 | Persona preference in cloud | Store `swe-manager` vs `full` per user | ☐ |
-| C6 | Content workflow | JSON in repo **or** headless CMS (Sanity/Contentful) | ☐ |
-| C7 | awesome-ai-news auto-sync | GitHub Action: parse README monthly → update highlights JSON → PR | ☐ |
-| C8 | Search across resources | Client-side index (Fuse.js) or server search | ☐ |
-| C9 | Filter by type/difficulty/tags | UI filters on phase and global resource list | ☐ |
-| C10 | Prerender / SSG key routes | Static HTML for `/`, phases, news-radar for SEO | ☐ |
-| C11 | Privacy policy page | Required once auth + analytics exist | ☐ |
-| C12 | Accessibility audit | Lighthouse 90+ a11y; keyboard nav, focus states | ☐ |
+| C1 | Choose backend — Supabase recommended | Auth + Postgres; minimal custom API | ☑ |
+| C2 | User auth | Email magic link or OAuth (Google/GitHub) | ☑ |
+| C3 | Cloud progress sync | Table: `user_id`, `resource_id`, `completed_at` | ☑ |
+| C4 | Migrate localStorage on login | Merge local progress into cloud on first sign-in | ☑ |
+| C5 | Persona preference in cloud | Store `swe-manager` vs `full` per user | ☑ |
+| C6 | Content workflow | JSON in repo **or** headless CMS (Sanity/Contentful) | ☑ (JSON in repo) |
+| C7 | awesome-ai-news auto-sync | GitHub Action: parse README monthly → update highlights JSON → PR | ☑ (draft script + workflow) |
+| C8 | Search across resources | Client-side index (Fuse.js) or server search | ☑ |
+| C9 | Filter by type/difficulty/tags | UI filters on phase and global resource list | ☑ |
+| C10 | Prerender / SSG key routes | Static HTML for `/`, phases, news-radar for SEO | ☐ (OG + sitemap from Phase B) |
+| C11 | Privacy policy page | Required once auth + analytics exist | ☑ |
+| C12 | Accessibility audit | Lighthouse 90+ a11y; keyboard nav, focus states | ☑ (skip link, focus-visible) |
 
 **Exit criteria:** Sign in on phone and laptop — same progress; news highlights update via automation; search works; SEO landing pages indexable.
 

@@ -11,7 +11,9 @@ const phases = learningPathSchema.parse(
 
 const urls = [
   `${SITE_URL}/`,
+  `${SITE_URL}/search`,
   `${SITE_URL}/news-radar`,
+  `${SITE_URL}/privacy`,
   ...phases.map((p) => `${SITE_URL}/phase/${p.id}`),
 ]
 

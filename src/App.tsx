@@ -18,6 +18,9 @@ import { usePersonaProgress } from './hooks/usePersonaProgress'
 import { ProgressActions } from './components/ProgressActions'
 import { PersonaBanner } from './components/PersonaBanner'
 import { Sidebar } from './components/Sidebar'
+import { AuthButton } from './components/AuthButton'
+import { SearchView } from './components/SearchView'
+import { PrivacyPage } from './components/PrivacyPage'
 import { useProgress } from './hooks/useProgress'
 import { usePersona } from './hooks/usePersona'
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, usePageMeta } from './hooks/usePageMeta'
@@ -84,13 +87,16 @@ function AppShell() {
 
   return (
     <div className="app-shell">
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
       <Sidebar
         personaId={personaId}
         completedCount={phaseCompleted}
         totalCount={phaseTotal}
       />
 
-      <main className="main-content">
+      <main id="main-content" className="main-content" tabIndex={-1}>
         <div className="top-bar">
           <ProgressBar
             completed={progressDone}
@@ -98,22 +104,27 @@ function AppShell() {
             label={progressLabel}
           />
           <div className="top-bar-actions">
-            {personaId === 'swe-manager' && isPhaseView && (
-              <label className="toggle-skipped">
-                <input
-                  type="checkbox"
-                  checked={showSkipped}
-                  onChange={(e) => setShowSkipped(e.target.checked)}
-                />
-                Show skipped
-              </label>
-            )}
-            <ProgressActions
-              count={count}
-              onExport={exportProgress}
-              onImport={importProgress}
-              onReset={reset}
-            />
+            <div className="top-bar-tools">
+              {personaId === 'swe-manager' && isPhaseView && (
+                <label className="toggle-skipped">
+                  <input
+                    type="checkbox"
+                    checked={showSkipped}
+                    onChange={(e) => setShowSkipped(e.target.checked)}
+                  />
+                  Show skipped
+                </label>
+              )}
+              <ProgressActions
+                count={count}
+                onExport={exportProgress}
+                onImport={importProgress}
+                onReset={reset}
+              />
+            </div>
+            <div className="top-bar-account">
+              <AuthButton />
+            </div>
           </div>
         </div>
 
@@ -202,12 +213,32 @@ function PhasePage() {
   )
 }
 
+function SearchPage() {
+  usePageMeta(
+    'Search Resources',
+    'Search and filter the full AI learning path curriculum.',
+    '/search',
+  )
+  return <SearchView />
+}
+
+function PrivacyRoute() {
+  usePageMeta(
+    'Privacy Policy',
+    'How AI Learning Path handles your data, progress, and analytics.',
+    '/privacy',
+  )
+  return <PrivacyPage />
+}
+
 function App() {
   return (
     <Routes>
       <Route element={<AppShell />}>
         <Route index element={<OverviewPage />} />
+        <Route path="search" element={<SearchPage />} />
         <Route path="news-radar" element={<NewsRadarPage />} />
+        <Route path="privacy" element={<PrivacyRoute />} />
         <Route path="phase/:phaseId" element={<PhasePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>

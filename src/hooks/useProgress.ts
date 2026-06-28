@@ -1,4 +1,12 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { useAuth } from '../context/AuthProvider'
+import {
+  clearCloudProgress,
+  fetchCloudProgress,
+  mergeProgressSets,
+  syncProgressToCloud,
+  upsertProgressItem,
+} from '../services/userDataSync'
 import { downloadProgress, parseProgressFile } from '../utils/progressExport'
 
 const STORAGE_KEY = 'ai-learning-path-progress'
@@ -13,29 +21,85 @@ function readStoredProgress(): Set<string> {
   return new Set()
 }
 
+function writeStoredProgress(completed: Set<string>) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify([...completed]))
+}
+
 export function useProgress() {
+  const { user } = useAuth()
   const [completed, setCompleted] = useState<Set<string>>(readStoredProgress)
+  const [syncing, setSyncing] = useState(false)
+  const mergedForUser = useRef<string | null>(null)
 
   useEffect(() => {
     setCompleted(readStoredProgress())
   }, [])
 
-  const persist = useCallback((next: Set<string>) => {
-    setCompleted(next)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...next]))
-  }, [])
+  useEffect(() => {
+    if (!user) {
+      mergedForUser.current = null
+      return
+    }
+    if (mergedForUser.current === user.id) return
+
+    let cancelled = false
+    setSyncing(true)
+
+    ;(async () => {
+      try {
+        const local = readStoredProgress()
+        const cloud = await fetchCloudProgress(user.id)
+        const merged = mergeProgressSets(local, cloud)
+        if (cancelled) return
+
+        writeStoredProgress(merged)
+        setCompleted(merged)
+        await syncProgressToCloud(user.id, merged)
+        mergedForUser.current = user.id
+      } catch (err) {
+        console.error('Progress sync failed:', err)
+      } finally {
+        if (!cancelled) setSyncing(false)
+      }
+    })()
+
+    return () => {
+      cancelled = true
+    }
+  }, [user])
+
+  const persist = useCallback(
+    (next: Set<string>, sync = Boolean(user)) => {
+      setCompleted(next)
+      writeStoredProgress(next)
+      if (sync && user) {
+        void syncProgressToCloud(user.id, next).catch((err) =>
+          console.error('Progress sync failed:', err),
+        )
+      }
+    },
+    [user],
+  )
 
   const toggle = useCallback(
     (id: string) => {
       setCompleted((prev) => {
         const next = new Set(prev)
-        if (next.has(id)) next.delete(id)
-        else next.add(id)
-        localStorage.setItem(STORAGE_KEY, JSON.stringify([...next]))
+        const adding = !next.has(id)
+        if (adding) next.add(id)
+        else next.delete(id)
+        writeStoredProgress(next)
+
+        if (user) {
+          void upsertProgressItem(user.id, id, adding).catch((err) =>
+            console.error('Progress sync failed:', err),
+          )
+        }
+
         return next
       })
     },
-    [],
+    [user],
   )
 
   const isComplete = useCallback(
@@ -43,7 +107,14 @@ export function useProgress() {
     [completed],
   )
 
-  const reset = useCallback(() => persist(new Set()), [persist])
+  const reset = useCallback(() => {
+    persist(new Set())
+    if (user) {
+      void clearCloudProgress(user.id).catch((err) =>
+        console.error('Progress reset sync failed:', err),
+      )
+    }
+  }, [persist, user])
 
   const exportProgress = useCallback(() => {
     downloadProgress(completed)
@@ -69,5 +140,6 @@ export function useProgress() {
     exportProgress,
     importProgress,
     count: completed.size,
+    syncing,
   }
 }
