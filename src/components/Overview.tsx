@@ -3,11 +3,16 @@ import type { PersonaId } from '../data/personas'
 import { PERSONAS, getResourcePriority } from '../data/personas'
 import { PathStats } from './ProgressBar'
 
+import { CommunityStatBadge } from './CommunityStatBadge'
+import type { PhaseCompletionStat } from '../services/communityStats'
+
 interface OverviewProps {
   personaId: PersonaId
   onSelectPhase: (id: string) => void
   onSelectNewsRadar: () => void
   isComplete: (id: string) => boolean
+  getPhaseStat?: (phaseId: string) => PhaseCompletionStat | undefined
+  communityStatsLoading?: boolean
 }
 
 export function Overview({
@@ -15,6 +20,8 @@ export function Overview({
   onSelectPhase,
   onSelectNewsRadar,
   isComplete,
+  getPhaseStat,
+  communityStatsLoading,
 }: OverviewProps) {
   const persona = PERSONAS[personaId]
   const orderedPhases = persona.phaseOrder
@@ -138,6 +145,10 @@ export function Overview({
                   <span>
                     {done}/{visible.length} done
                   </span>
+                  <CommunityStatBadge
+                    stat={getPhaseStat?.(phase.id)}
+                    loading={communityStatsLoading}
+                  />
                 </div>
               </button>
             )

@@ -32,6 +32,7 @@
 | **SEO** | ✅ Prerender | OG + sitemap; post-build HTML for key routes (C10) |
 | **Analytics** | ⚠️ Optional | Plausible via `VITE_PLAUSIBLE_DOMAIN` |
 | **Error tracking** | ⚠️ Optional | Sentry via `VITE_SENTRY_DSN` (B11) |
+| **Community stats** | ✅ D1 | Anonymous phase completion % via Supabase RPC (5+ learners) |
 
 ### Tech stack today
 
@@ -154,7 +155,7 @@
 
 | # | Task | Details | Done |
 |---|------|---------|------|
-| D1 | Public completion stats | Anonymous aggregate: "X% completed Agent Foundations" | ☐ |
+| D1 | Public completion stats | Anonymous aggregate: "X% completed Agent Foundations" | ☑ |
 | D2 | User-submitted resources | Form → moderation queue → admin approve | ☐ |
 | D3 | Additional personas | e.g. "Data Scientist", "Product Manager", "IC Engineer" | ☐ |
 | D4 | Admin dashboard | Manage resources, review submissions, view link health | ☐ |
@@ -309,6 +310,7 @@ npm run test
 npm run test:e2e
 npm run check:links
 npm run migrate:supabase   # requires SUPABASE_DB_PASSWORD in .env
+npm run sync:phase-resources   # refresh phase→resource map for D1 stats
 ```
 
 ---

@@ -77,7 +77,8 @@ Without Supabase env vars the app works fully offline with localStorage only.
    npm run migrate:supabase
    ```
    Requires `SUPABASE_DB_PASSWORD` in `.env` (Dashboard → **Settings → Database** → database password).
-   Or paste `supabase/migrations/001_phase_c.sql` into the [SQL Editor](https://supabase.com/dashboard/project/_/sql/new).
+   Or paste `supabase/migrations/*.sql` into the [SQL Editor](https://supabase.com/dashboard/project/_/sql/new).
+   Phase D stats also need `npm run sync:phase-resources` (included in `migrate:supabase`).
 3. Enable **Google** auth (and/or email) under Authentication → Providers
 4. Add redirect URL: `https://www.vidyanix.ai` (and `http://localhost:5173` for dev)
 5. Copy to `.env` (see `.env.example`):

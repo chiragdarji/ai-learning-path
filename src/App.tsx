@@ -23,7 +23,9 @@ import { SearchView } from './components/SearchView'
 import { PrivacyPage } from './components/PrivacyPage'
 import { useProgress } from './hooks/useProgress'
 import { usePersona } from './hooks/usePersona'
+import { useCommunityStats } from './hooks/useCommunityStats'
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, usePageMeta } from './hooks/usePageMeta'
+import type { PhaseCompletionStat } from './services/communityStats'
 import type { Phase } from './types'
 import { getResourcePriority } from './data/personas'
 
@@ -84,6 +86,7 @@ function AppShell() {
     personaId === 'swe-manager' ? essentialDone : trackDone
 
   const isPhaseView = location.pathname.startsWith('/phase/')
+  const { getPhaseStat, loading: communityStatsLoading } = useCommunityStats()
 
   return (
     <div className="app-shell">
@@ -140,7 +143,16 @@ function AppShell() {
           essentialDone={essentialDone}
         />
 
-        <Outlet context={{ personaId, isComplete, toggle, showSkipped }} />
+        <Outlet
+          context={{
+            personaId,
+            isComplete,
+            toggle,
+            showSkipped,
+            getPhaseStat,
+            communityStatsLoading,
+          }}
+        />
       </main>
     </div>
   )
@@ -151,10 +163,13 @@ interface OutletContext {
   isComplete: (id: string) => boolean
   toggle: (id: string) => void
   showSkipped: boolean
+  getPhaseStat: (phaseId: string) => PhaseCompletionStat | undefined
+  communityStatsLoading: boolean
 }
 
 function OverviewPage() {
-  const { personaId, isComplete } = useOutletContext<OutletContext>()
+  const { personaId, isComplete, getPhaseStat, communityStatsLoading } =
+    useOutletContext<OutletContext>()
   const navigate = useNavigate()
   usePageMeta(DEFAULT_TITLE, DEFAULT_DESCRIPTION, '/')
 
@@ -164,6 +179,8 @@ function OverviewPage() {
       onSelectPhase={(id) => navigate(`/phase/${id}`)}
       onSelectNewsRadar={() => navigate('/news-radar')}
       isComplete={isComplete}
+      getPhaseStat={getPhaseStat}
+      communityStatsLoading={communityStatsLoading}
     />
   )
 }
@@ -187,8 +204,14 @@ function NewsRadarPage() {
 
 function PhasePage() {
   const { phaseId } = useParams<{ phaseId: string }>()
-  const { personaId, isComplete, toggle, showSkipped } =
-    useOutletContext<OutletContext>()
+  const {
+    personaId,
+    isComplete,
+    toggle,
+    showSkipped,
+    getPhaseStat,
+    communityStatsLoading,
+  } = useOutletContext<OutletContext>()
 
   const phase = LEARNING_PATH.find((p) => p.id === phaseId)
 
@@ -209,6 +232,8 @@ function PhasePage() {
       isComplete={isComplete}
       onToggle={toggle}
       showSkipped={showSkipped}
+      phaseCommunityStat={getPhaseStat(phase.id)}
+      communityStatsLoading={communityStatsLoading}
     />
   )
 }

@@ -1,9 +1,13 @@
-import { readdirSync, readFileSync } from 'node:fs'
+/**
+ * Sync phase → resource mapping from content/learning-path.json to Supabase.
+ * Run after migrations: npm run sync:phase-resources
+ */
+import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import postgres from 'postgres'
+import { learningPathSchema } from '../src/schemas/content.ts'
 
 const PROJECT_REF = 'zzwavrajcrpruubfbjnm'
-const MIGRATIONS_DIR = join(import.meta.dirname, '../supabase/migrations')
 
 function loadEnvFile() {
   try {
@@ -18,11 +22,26 @@ function loadEnvFile() {
       if (!(key in process.env)) process.env[key] = value
     }
   } catch {
-    /* .env optional if vars already exported */
+    /* optional */
   }
 }
 
 loadEnvFile()
+
+const phases = learningPathSchema.parse(
+  JSON.parse(
+    readFileSync(join(import.meta.dirname, '../content/learning-path.json'), 'utf8'),
+  ),
+)
+
+const rows = phases.flatMap((phase) =>
+  phase.steps.flatMap((step) =>
+    step.resources.map((resource) => ({
+      phase_id: phase.id,
+      resource_id: resource.id,
+    })),
+  ),
+)
 
 const dbUrl = process.env.SUPABASE_DB_URL
 const password = process.env.SUPABASE_DB_PASSWORD
@@ -42,28 +61,20 @@ const sql = dbUrl
     : null
 
 if (!sql) {
-  console.error(
-    'Missing database credentials. Add to .env:\n' +
-      '  SUPABASE_DB_PASSWORD=<from Supabase Dashboard → Settings → Database>\n' +
-      'Or set SUPABASE_DB_URL to the full connection string.',
-  )
+  console.error('Missing SUPABASE_DB_PASSWORD or SUPABASE_DB_URL in .env')
   process.exit(1)
 }
 
-const migrationFiles = readdirSync(MIGRATIONS_DIR)
-  .filter((name) => name.endsWith('.sql'))
-  .sort()
-
 try {
-  for (const file of migrationFiles) {
-    const migrationPath = join(MIGRATIONS_DIR, file)
-    const sqlText = readFileSync(migrationPath, 'utf8')
-    console.log(`Applying supabase/migrations/${file} …`)
-    await sql.unsafe(sqlText)
+  await sql`delete from public.phase_resources`
+  if (rows.length > 0) {
+    await sql`
+      insert into public.phase_resources ${sql(rows, 'phase_id', 'resource_id')}
+    `
   }
-  console.log('All migrations applied successfully.')
+  console.log(`Synced ${rows.length} phase-resource rows (${phases.length} phases).`)
 } catch (err) {
-  console.error('Migration failed:', err instanceof Error ? err.message : err)
+  console.error('Sync failed:', err instanceof Error ? err.message : err)
   process.exit(1)
 } finally {
   await sql.end()

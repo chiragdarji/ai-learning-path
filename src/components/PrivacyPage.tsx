@@ -39,6 +39,16 @@ export function PrivacyPage() {
       </section>
 
       <section>
+        <h2>Anonymous community stats</h2>
+        <p>
+          When enough learners use cloud sync, we may show aggregate completion
+          percentages per phase (for example, “42% of learners completed Agent
+          Foundations”). These figures never include your email or individual
+          progress — only anonymous counts.
+        </p>
+      </section>
+
+      <section>
         <h2>Analytics</h2>
         <p>
           We may use privacy-friendly analytics (Plausible) to count page views. No

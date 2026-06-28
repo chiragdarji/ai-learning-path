@@ -3,6 +3,8 @@ import type { PersonaId } from '../data/personas'
 import { PERSONAS, getResourcePriority } from '../data/personas'
 import { difficultyLabel } from '../utils/helpers'
 import { ResourceCard } from './ResourceCard'
+import { CommunityStatBadge } from './CommunityStatBadge'
+import type { PhaseCompletionStat } from '../services/communityStats'
 
 interface PhaseViewProps {
   phase: Phase
@@ -10,6 +12,8 @@ interface PhaseViewProps {
   isComplete: (id: string) => boolean
   onToggle: (id: string) => void
   showSkipped: boolean
+  phaseCommunityStat?: PhaseCompletionStat
+  communityStatsLoading?: boolean
 }
 
 export function PhaseView({
@@ -18,6 +22,8 @@ export function PhaseView({
   isComplete,
   onToggle,
   showSkipped,
+  phaseCommunityStat,
+  communityStatsLoading,
 }: PhaseViewProps) {
   const persona = PERSONAS[personaId]
   const override = persona.phaseOverrides[phase.id]
@@ -53,6 +59,10 @@ export function PhaseView({
           {personaId === 'swe-manager' && essentialInPhase > 0 && (
             <span className="essential-count">{essentialInPhase} essential</span>
           )}
+          <CommunityStatBadge
+            stat={phaseCommunityStat}
+            loading={communityStatsLoading}
+          />
         </div>
       </header>
 
