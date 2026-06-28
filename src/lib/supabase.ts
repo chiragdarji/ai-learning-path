@@ -14,7 +14,7 @@ export const supabase: SupabaseClient | null = isSupabaseConfigured
 
 export interface UserProfileRow {
   user_id: string
-  persona_id: 'full' | 'swe-manager'
+  persona_id: 'full' | 'swe-manager' | 'product-manager' | 'ic-engineer' | 'data-scientist'
   updated_at: string
 }
 

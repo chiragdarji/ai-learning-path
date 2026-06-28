@@ -1,6 +1,6 @@
 import { LEARNING_PATH } from '../data/learningPath'
 import type { PersonaId } from '../data/personas'
-import { PERSONAS, getResourcePriority } from '../data/personas'
+import { PERSONAS, getResourcePriority, isEssentialTrack } from '../data/personas'
 import { PathStats } from './ProgressBar'
 
 import { CommunityStatBadge } from './CommunityStatBadge'
@@ -32,13 +32,13 @@ export function Overview({
     <div className="overview">
       <header className="page-header">
         <p className="eyebrow">
-          {personaId === 'swe-manager'
-            ? 'Personalized for Engineering Managers'
+          {isEssentialTrack(personaId)
+            ? `Personalized for ${persona.label}`
             : 'Curated AI Engineering Curriculum'}
         </p>
         <h1>
-          {personaId === 'swe-manager'
-            ? 'Lead AI teams without becoming an ML researcher'
+          {isEssentialTrack(personaId)
+            ? persona.summary.split('.')[0]
             : 'Your path from LLM basics to production agents'}
         </h1>
         <p className="lead">{persona.summary}</p>
@@ -68,7 +68,7 @@ export function Overview({
         </div>
       </section>
 
-      {personaId === 'swe-manager' && (
+      {isEssentialTrack(personaId) && (
         <section className="manager-fast-track">
           <h2>Recommended order for you</h2>
           <p className="section-intro">
@@ -109,7 +109,7 @@ export function Overview({
       )}
 
       <section className="phase-map">
-        <h2>{personaId === 'swe-manager' ? 'All phases' : 'Phase map'}</h2>
+        <h2>{isEssentialTrack(personaId) ? 'All phases' : 'Phase map'}</h2>
         <div className="phase-timeline">
           {LEARNING_PATH.map((phase) => {
             const override = persona.phaseOverrides[phase.id]
@@ -130,7 +130,7 @@ export function Overview({
                 <div className="phase-card-header">
                   <span className="phase-card-num">
                     Phase {phase.number}
-                    {personaId === 'swe-manager' && rank > 0 && (
+                    {isEssentialTrack(personaId) && rank > 0 && (
                       <span className="your-order"> · Your #{rank}</span>
                     )}
                   </span>
@@ -181,7 +181,7 @@ export function Overview({
         </section>
       )}
 
-      {personaId === 'swe-manager' && (
+      {isEssentialTrack(personaId) && (
         <section className="ranking-note">
           <h2>Priority labels on your track</h2>
           <div className="rank-ladder">

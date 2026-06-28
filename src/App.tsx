@@ -20,6 +20,11 @@ import { PersonaBanner } from './components/PersonaBanner'
 import { Sidebar } from './components/Sidebar'
 import { AuthButton } from './components/AuthButton'
 import { SearchView } from './components/SearchView'
+import { SubmitResourcePage } from './components/SubmitResourcePage'
+import { AdminPage } from './components/AdminPage'
+import { DigestPage } from './components/DigestPage'
+import { TeamPage } from './components/TeamPage'
+import { EmbedPage } from './components/EmbedPage'
 import { PrivacyPage } from './components/PrivacyPage'
 import { useProgress } from './hooks/useProgress'
 import { usePersona } from './hooks/usePersona'
@@ -27,7 +32,7 @@ import { useCommunityStats } from './hooks/useCommunityStats'
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, usePageMeta } from './hooks/usePageMeta'
 import type { PhaseCompletionStat } from './services/communityStats'
 import type { Phase } from './types'
-import { getResourcePriority } from './data/personas'
+import { getResourcePriority, isEssentialTrack } from './data/personas'
 
 function countPhase(
   phase: Phase,
@@ -78,12 +83,13 @@ function AppShell() {
   const phaseTotal = (p: Phase) =>
     countPhase(p, isComplete, personaId, showSkipped).total
 
-  const progressLabel =
-    personaId === 'swe-manager' ? 'Essential progress' : 'Overall progress'
-  const progressTotal =
-    personaId === 'swe-manager' ? essentialIds.length : trackIds.length
-  const progressDone =
-    personaId === 'swe-manager' ? essentialDone : trackDone
+  const progressLabel = isEssentialTrack(personaId)
+    ? 'Essential progress'
+    : 'Overall progress'
+  const progressTotal = isEssentialTrack(personaId)
+    ? essentialIds.length
+    : trackIds.length
+  const progressDone = isEssentialTrack(personaId) ? essentialDone : trackDone
 
   const isPhaseView = location.pathname.startsWith('/phase/')
   const { getPhaseStat, loading: communityStatsLoading } = useCommunityStats()
@@ -108,7 +114,7 @@ function AppShell() {
           />
           <div className="top-bar-actions">
             <div className="top-bar-tools">
-              {personaId === 'swe-manager' && isPhaseView && (
+              {isEssentialTrack(personaId) && isPhaseView && (
                 <label className="toggle-skipped">
                   <input
                     type="checkbox"
@@ -263,6 +269,11 @@ function App() {
         <Route index element={<OverviewPage />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="news-radar" element={<NewsRadarPage />} />
+        <Route path="submit" element={<SubmitResourcePage />} />
+        <Route path="digest" element={<DigestPage />} />
+        <Route path="team" element={<TeamPage />} />
+        <Route path="embed" element={<EmbedPage />} />
+        <Route path="admin" element={<AdminPage />} />
         <Route path="privacy" element={<PrivacyRoute />} />
         <Route path="phase/:phaseId" element={<PhasePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />

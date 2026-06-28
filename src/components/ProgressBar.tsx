@@ -1,6 +1,6 @@
 import { LEARNING_PATH } from '../data/learningPath'
 import type { PersonaId } from '../data/personas'
-import { getPersonaResourceIds } from '../data/personas'
+import { getPersonaResourceIds, isEssentialTrack } from '../data/personas'
 import { PATH_STATS } from '../data/learningPath'
 
 interface ProgressBarProps {
@@ -61,13 +61,13 @@ export function PathStats({ personaId = 'full', isComplete }: PathStatsProps) {
       </div>
       <div className="stat">
         <span className="stat-num">
-          {personaId === 'swe-manager' ? essentialIds.length : PATH_STATS.totalResources}
+          {isEssentialTrack(personaId) ? essentialIds.length : PATH_STATS.totalResources}
         </span>
         <span className="stat-label">
-          {personaId === 'swe-manager' ? 'Essential for you' : 'Resources'}
+          {isEssentialTrack(personaId) ? 'Essential for you' : 'Resources'}
         </span>
       </div>
-      {personaId === 'swe-manager' && isComplete && (
+      {isEssentialTrack(personaId) && isComplete && (
         <div className="stat">
           <span className="stat-num">{essentialDone}</span>
           <span className="stat-label">Completed</span>

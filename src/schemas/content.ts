@@ -55,7 +55,13 @@ export const resourcePrioritySchema = z.enum([
   'skip',
 ])
 
-export const personaIdSchema = z.enum(['full', 'swe-manager'])
+export const personaIdSchema = z.enum([
+  'full',
+  'swe-manager',
+  'product-manager',
+  'ic-engineer',
+  'data-scientist',
+])
 
 export const personaSchema = z.object({
   id: personaIdSchema,

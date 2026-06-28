@@ -6,9 +6,16 @@ import { fetchCloudPersona, upsertCloudPersona } from '../services/userDataSync'
 const STORAGE_KEY = 'ai-learning-path-persona'
 
 function readStoredPersona(): PersonaId {
+  const valid: PersonaId[] = [
+    'full',
+    'swe-manager',
+    'product-manager',
+    'ic-engineer',
+    'data-scientist',
+  ]
   try {
     const stored = localStorage.getItem(STORAGE_KEY) as PersonaId | null
-    if (stored === 'full' || stored === 'swe-manager') return stored
+    if (stored && valid.includes(stored)) return stored
   } catch {
     /* ignore */
   }

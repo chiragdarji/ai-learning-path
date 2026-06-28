@@ -23,7 +23,11 @@ export async function fetchCloudPersona(userId: string): Promise<PersonaId | nul
     .maybeSingle()
 
   if (error) throw error
-  if (data?.persona_id === 'full' || data?.persona_id === 'swe-manager') {
+  if (data?.persona_id === 'full' ||
+      data?.persona_id === 'swe-manager' ||
+      data?.persona_id === 'product-manager' ||
+      data?.persona_id === 'ic-engineer' ||
+      data?.persona_id === 'data-scientist') {
     return data.persona_id
   }
   return null

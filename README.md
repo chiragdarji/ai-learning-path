@@ -95,7 +95,25 @@ On sign-in, local progress merges with cloud and syncs both ways.
 2. On another device, click **Import** and select the file (merges with existing progress)
 3. **Reset** clears all checkmarks
 
-## Deploy to Vercel (recommended)
+## Phase D — Community
+
+| Feature | Route / artifact |
+|---------|------------------|
+| Submit resource | `/submit` (sign in required) |
+| Admin review | `/admin` — set `VITE_ADMIN_EMAILS` or `is_admin` on profile |
+| Weekly digest | `/digest` + GitHub Action `weekly-digest.yml` |
+| Team assignments | `/team` |
+| Public API | `/api/v1/curriculum.json` (generated at build) |
+| Embed docs | `/embed` |
+| Personas | Manager, PM, IC Engineer, Data Scientist, Full |
+| Notes | Per-resource when signed in |
+| i18n | English / Español in sidebar |
+
+After pulling Phase D changes, run:
+
+```bash
+npm run migrate:supabase
+```
 
 1. Push this repo to GitHub
 2. Go to [vercel.com](https://vercel.com) → **Add New Project** → import the repo

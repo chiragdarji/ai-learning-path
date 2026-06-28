@@ -13,7 +13,7 @@
 
 ---
 
-## Current State (Phase C)
+## Current State (Phase D complete)
 
 | Layer | Status | Notes |
 |-------|--------|-------|
@@ -156,15 +156,15 @@
 | # | Task | Details | Done |
 |---|------|---------|------|
 | D1 | Public completion stats | Anonymous aggregate: "X% completed Agent Foundations" | ☑ |
-| D2 | User-submitted resources | Form → moderation queue → admin approve | ☐ |
-| D3 | Additional personas | e.g. "Data Scientist", "Product Manager", "IC Engineer" | ☐ |
-| D4 | Admin dashboard | Manage resources, review submissions, view link health | ☐ |
-| D5 | Email digest | Weekly: 3 essential resources + top news headline + learning action | ☐ |
-| D6 | Embed / API | JSON API or oEmbed for curriculum elsewhere | ☐ |
-| D7 | Versioned curriculum | "2026 Q2 path" snapshots; users pinned to a version | ☐ |
-| D8 | Community notes | Per-resource user notes (private or shared) | ☐ |
-| D9 | Team / org mode | Manager assigns resources to direct reports | ☐ |
-| D10 | i18n | Localize UI and content labels | ☐ |
+| D2 | User-submitted resources | Form → moderation queue → admin approve | ☑ |
+| D3 | Additional personas | e.g. "Data Scientist", "Product Manager", "IC Engineer" | ☑ |
+| D4 | Admin dashboard | Manage resources, review submissions, view link health | ☑ |
+| D5 | Email digest | Weekly: 3 essential resources + top news headline + learning action | ☑ |
+| D6 | Embed / API | JSON API or oEmbed for curriculum elsewhere | ☑ |
+| D7 | Versioned curriculum | "2026 Q2 path" snapshots; users pinned to a version | ☑ |
+| D8 | Community notes | Per-resource user notes (private or shared) | ☑ |
+| D9 | Team / org mode | Manager assigns resources to direct reports | ☑ |
+| D10 | i18n | Localize UI and content labels | ☑ |
 
 **Exit criteria:** Contributors can propose resources; users receive weekly value without visiting the site; teams can adopt the path internally.
 

@@ -1,0 +1,22 @@
+name: Weekly digest
+
+on:
+  schedule:
+    - cron: '0 14 * * 1'
+  workflow_dispatch:
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run digest:generate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: weekly-digest
+          path: dist-digest/weekly-digest.md

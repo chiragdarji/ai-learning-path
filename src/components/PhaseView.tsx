@@ -1,6 +1,6 @@
 import type { Phase } from '../types'
 import type { PersonaId } from '../data/personas'
-import { PERSONAS, getResourcePriority } from '../data/personas'
+import { PERSONAS, getResourcePriority, isEssentialTrack } from '../data/personas'
 import { difficultyLabel } from '../utils/helpers'
 import { ResourceCard } from './ResourceCard'
 import { CommunityStatBadge } from './CommunityStatBadge'
@@ -56,7 +56,7 @@ export function PhaseView({
           <span>
             {done}/{total} complete
           </span>
-          {personaId === 'swe-manager' && essentialInPhase > 0 && (
+          {isEssentialTrack(personaId) && essentialInPhase > 0 && (
             <span className="essential-count">{essentialInPhase} essential</span>
           )}
           <CommunityStatBadge

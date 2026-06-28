@@ -12,6 +12,10 @@ describe('getResourcePriority', () => {
     expect(getResourcePriority('full', 'unknown-id')).toBe('essential')
   })
 
+  it('returns essential for ic-engineer like full track', () => {
+    expect(getResourcePriority('ic-engineer', 'ml-beginners')).toBe('essential')
+  })
+
   it('returns persona-specific priority for manager track', () => {
     expect(getResourcePriority('swe-manager', 'dmls')).toBe('essential')
     expect(getResourcePriority('swe-manager', 'ml-beginners')).toBe('skip')

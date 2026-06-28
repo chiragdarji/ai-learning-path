@@ -9,10 +9,25 @@ function loadJson(relativePath: string): unknown {
   return JSON.parse(text)
 }
 
+const rawPersonas = loadJson('content/personas.json') as Record<string, unknown>
+const phaseDPersonas = loadJson('content/personas-phase-d.json') as Record<
+  string,
+  Record<string, unknown>
+>
+
+const mergedPersonas = {
+  ...rawPersonas,
+  ...phaseDPersonas,
+  'product-manager': {
+    ...phaseDPersonas['product-manager'],
+    resources: (rawPersonas['swe-manager'] as Record<string, unknown>).resources,
+  },
+}
+
 try {
   validateAllContent(
     loadJson('content/learning-path.json'),
-    loadJson('content/personas.json'),
+    mergedPersonas,
     loadJson('content/ai-news-radar.json'),
   )
   console.log('Content validation passed.')

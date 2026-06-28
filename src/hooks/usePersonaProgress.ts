@@ -7,12 +7,12 @@ export function usePersonaProgress(
   isComplete: (id: string) => boolean,
 ) {
   const trackIds =
-    personaId === 'full'
+    personaId === 'full' || personaId === 'ic-engineer'
       ? allIds
       : getPersonaResourceIds(personaId, allIds, ['essential', 'recommended', 'optional'])
 
   const essentialIds =
-    personaId === 'full'
+    personaId === 'full' || personaId === 'ic-engineer'
       ? allIds
       : getPersonaResourceIds(personaId, allIds, ['essential'])
 

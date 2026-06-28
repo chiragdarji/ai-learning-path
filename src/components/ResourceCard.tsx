@@ -4,6 +4,8 @@ import type { ResourcePriority } from '../data/personas'
 import { PRIORITY_LABELS } from '../data/personas'
 import { difficultyLabel, typeIcon } from '../utils/helpers'
 
+import { ResourceNotes } from './ResourceNotes'
+
 interface ResourceCardProps {
   resource: Resource
   done: boolean
@@ -77,6 +79,8 @@ export function ResourceCard({
           </span>
         ))}
       </div>
+
+      <ResourceNotes resourceId={resource.id} />
     </article>
   )
 }

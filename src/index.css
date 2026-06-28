@@ -1789,3 +1789,155 @@ a:hover {
 .sidebar-footer-link.active {
   color: var(--accent);
 }
+
+.curriculum-version {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+}
+
+.locale-switch select {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  padding: 0.35rem 0.5rem;
+}
+
+.persona-switch-select select {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  padding: 0.45rem 0.65rem;
+  min-width: 12rem;
+}
+
+.community-page {
+  max-width: 42rem;
+}
+
+.community-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.community-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.community-form input,
+.community-form textarea,
+.community-form select {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.65rem;
+  font-family: inherit;
+}
+
+.inline-form {
+  flex-direction: row;
+  align-items: center;
+}
+
+.admin-panel {
+  margin: 2rem 0;
+  padding: 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.admin-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-card {
+  padding: 1rem;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+}
+
+.admin-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.code-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 12px;
+}
+
+.digest-meta {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.resource-notes {
+  margin-top: 0.75rem;
+}
+
+.notes-toggle {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.notes-panel {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.notes-panel textarea {
+  width: 100%;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.shared-notes {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.shared-notes ul {
+  margin: 0.35rem 0 0;
+  padding-left: 1.1rem;
+}

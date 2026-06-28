@@ -7,6 +7,14 @@ interface PersonaBannerProps {
   essentialDone: number
 }
 
+const PERSONA_OPTIONS: PersonaId[] = [
+  'swe-manager',
+  'product-manager',
+  'ic-engineer',
+  'data-scientist',
+  'full',
+]
+
 export function PersonaBanner({
   personaId,
   onChangePersona,
@@ -14,6 +22,8 @@ export function PersonaBanner({
   essentialDone,
 }: PersonaBannerProps) {
   const persona = PERSONAS[personaId]
+  const tracksWithEssentials =
+    personaId !== 'full' && personaId !== 'ic-engineer'
 
   return (
     <div className="persona-banner">
@@ -23,21 +33,21 @@ export function PersonaBanner({
           <h2>{persona.label}</h2>
           <p>{persona.summary}</p>
         </div>
-        <div className="persona-switch">
-          <button
-            type="button"
-            className={personaId === 'swe-manager' ? 'active' : ''}
-            onClick={() => onChangePersona('swe-manager')}
+        <div className="persona-switch persona-switch-select">
+          <label htmlFor="persona-select" className="sr-only">
+            Choose track
+          </label>
+          <select
+            id="persona-select"
+            value={personaId}
+            onChange={(e) => onChangePersona(e.target.value as PersonaId)}
           >
-            Manager
-          </button>
-          <button
-            type="button"
-            className={personaId === 'full' ? 'active' : ''}
-            onClick={() => onChangePersona('full')}
-          >
-            Full track
-          </button>
+            {PERSONA_OPTIONS.map((id) => (
+              <option key={id} value={id}>
+                {PERSONAS[id].label}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
@@ -52,10 +62,9 @@ export function PersonaBanner({
         </div>
       )}
 
-      {personaId === 'swe-manager' && (
+      {tracksWithEssentials && (
         <p className="persona-progress-note">
-          Manager track: <strong>{essentialDone}/{essentialCount}</strong> essential
-          resources complete
+          Essential progress: <strong>{essentialDone}/{essentialCount}</strong>
         </p>
       )}
     </div>

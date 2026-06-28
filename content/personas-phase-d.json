@@ -1,0 +1,202 @@
+{
+  "ic-engineer": {
+    "id": "ic-engineer",
+    "label": "IC Engineer",
+    "subtitle": "Hands-on builder track",
+    "summary": "Full technical depth — implement RAG, agents, and production patterns yourself. Same comprehensive resource set as the full track, sequenced for individual contributors shipping AI features.",
+    "goals": [
+      "Build and debug RAG pipelines end-to-end",
+      "Implement agent workflows with evaluation from day one",
+      "Ship production-ready LLM features with proper observability",
+      "Stay current with frameworks without chasing every release"
+    ],
+    "phaseOrder": [
+      "foundations",
+      "llm-fundamentals",
+      "applied-llm",
+      "agent-foundations",
+      "production-agents",
+      "expert-mastery",
+      "ai-news-radar"
+    ],
+    "phaseOverrides": {},
+    "resources": {},
+    "resourceNotes": {}
+  },
+  "product-manager": {
+    "id": "product-manager",
+    "label": "Product Manager",
+    "subtitle": "Ship AI products with clarity",
+    "summary": "Lead AI product discovery and delivery without writing training code. Prioritizes user value, evaluation, guardrails, and cross-functional vocabulary — similar to the manager track with product-centric framing.",
+    "goals": [
+      "Write crisp PRDs for LLM and agent features",
+      "Choose between RAG, fine-tuning, and tool use for product bets",
+      "Define success metrics and eval criteria before launch",
+      "Communicate trade-offs to engineering and leadership"
+    ],
+    "phaseOrder": [
+      "llm-fundamentals",
+      "ai-news-radar",
+      "applied-llm",
+      "agent-foundations",
+      "production-agents",
+      "foundations",
+      "expert-mastery"
+    ],
+    "phaseOverrides": {
+      "llm-fundamentals": {
+        "description": "Product vocabulary for LLMs — prompts, context windows, and failure modes.",
+        "estimatedWeeks": "2–3 weeks",
+        "note": "Focus on prompt guide + intro videos; skip implementation-heavy repos."
+      },
+      "applied-llm": {
+        "description": "RAG and retrieval for product specs — when search beats fine-tuning.",
+        "estimatedWeeks": "3 weeks",
+        "note": "Understand accuracy improvement patterns; partner with eng on vector DB choice."
+      },
+      "agent-foundations": {
+        "description": "Agent UX patterns — when autonomy helps vs hurts the user journey.",
+        "estimatedWeeks": "3–4 weeks",
+        "note": "Read lab playbooks; prioritize eval and guardrails over framework depth."
+      },
+      "production-agents": {
+        "description": "Launch checklists — eval, cost, reliability, and MCP integrations.",
+        "estimatedWeeks": "3–4 weeks",
+        "note": "Evaluating AI Agents course is essential for PMs owning AI launches."
+      },
+      "ai-news-radar": {
+        "description": "Monthly signal for roadmap bets and stakeholder updates.",
+        "estimatedWeeks": "30 min/week",
+        "note": "Map headlines to PRD themes and learning bridges."
+      }
+    },
+    "resources": {},
+    "resourceNotes": {
+      "prompt-guide": "Your spec-writing superpower for LLM features.",
+      "improve-accuracy": "Frame eval loops in product terms before beta.",
+      "anthropic-agents": "Quote workflow-vs-agent guidance in roadmap reviews.",
+      "eval-agents": "Define launch gates and regression suites with your team.",
+      "awesome-ai-news": "Monthly scan for roadmap and exec briefings."
+    }
+  },
+  "data-scientist": {
+    "id": "data-scientist",
+    "label": "Data Scientist",
+    "subtitle": "ML foundations → applied LLMs",
+    "summary": "Bridge classical ML literacy with modern LLM/RAG engineering. Emphasizes foundations, embeddings, retrieval, and evaluation — lighter on multi-agent production ops unless you need them.",
+    "goals": [
+      "Connect traditional ML intuition to transformer-based systems",
+      "Design RAG and embedding pipelines with measurable quality",
+      "Evaluate LLM outputs with rigorous experiment design",
+      "Know when to fine-tune vs retrieve vs prompt"
+    ],
+    "phaseOrder": [
+      "foundations",
+      "llm-fundamentals",
+      "applied-llm",
+      "agent-foundations",
+      "ai-news-radar",
+      "production-agents",
+      "expert-mastery"
+    ],
+    "phaseOverrides": {
+      "foundations": {
+        "description": "Core ML literacy — don't skip this phase.",
+        "estimatedWeeks": "4–6 weeks",
+        "note": "DMLS + hands-on ML projects before deep LLM work."
+      },
+      "applied-llm": {
+        "description": "Your home turf — RAG, vectors, and accuracy at scale.",
+        "estimatedWeeks": "4–5 weeks",
+        "note": "Prioritize RAG surveys, vector DBs, and accuracy guides."
+      },
+      "agent-foundations": {
+        "description": "Agent patterns for data-heavy workflows — lighter than IC eng depth.",
+        "estimatedWeeks": "3 weeks",
+        "note": "Focus on overview guides; skip deep framework courses unless needed."
+      },
+      "production-agents": {
+        "description": "Eval and LLMOps — optional unless you own deployment.",
+        "estimatedWeeks": "2–3 weeks (optional)",
+        "note": "Evaluating AI Agents + LLMOps essentials."
+      }
+    },
+    "resources": {
+      "ml-beginners": "essential",
+      "made-with-ml": "recommended",
+      "udl-book": "optional",
+      "dmls": "essential",
+      "awesome-genai": "recommended",
+      "gradient-ascent": "recommended",
+      "data-hustle": "optional",
+      "llm-intro-video": "essential",
+      "hands-on-llm": "essential",
+      "llm-course": "recommended",
+      "transformers-course": "essential",
+      "prompt-guide": "essential",
+      "cot-paper": "recommended",
+      "llm-scratch-video": "optional",
+      "llm-scratch-book": "optional",
+      "vector-db-pinecone": "essential",
+      "vector-db-weaviate": "recommended",
+      "rag-survey": "essential",
+      "advanced-rag": "essential",
+      "improve-accuracy": "essential",
+      "llm-handbook": "essential",
+      "hands-on-ai-eng": "recommended",
+      "deep-focus": "recommended",
+      "decoding-ml": "essential",
+      "stanford-agents": "recommended",
+      "google-agents-wp": "recommended",
+      "agentic-ai-course": "optional",
+      "react-paper": "optional",
+      "tot-paper": "optional",
+      "anthropic-agents": "recommended",
+      "openai-agents": "recommended",
+      "effective-agents-video": "optional",
+      "google-companion": "optional",
+      "ms-agents": "optional",
+      "hf-agents": "optional",
+      "genai-agents": "optional",
+      "agent-design-patterns": "optional",
+      "mcp-video": "skip",
+      "mcp-course": "skip",
+      "mcp-book": "skip",
+      "agent-memory": "optional",
+      "generative-agents": "optional",
+      "build-eval-video": "recommended",
+      "agent-scratch-video": "optional",
+      "eval-agents": "essential",
+      "reflexion-paper": "optional",
+      "browser-agents": "skip",
+      "computer-use": "skip",
+      "claude-code": "skip",
+      "ai-agents-definitive": "optional",
+      "building-apps-agents": "optional",
+      "ai-engineering": "recommended",
+      "jam-with-ai": "optional",
+      "multi-agent-course": "optional",
+      "multi-agent-systems": "optional",
+      "multi-agent-dl": "skip",
+      "philo-agents": "skip",
+      "llmops": "essential",
+      "automated-testing": "recommended",
+      "neosage": "optional",
+      "awesome-ai-news": "essential",
+      "karpathy-software-changing": "recommended",
+      "agents-md": "skip",
+      "google-adk": "skip",
+      "openai-agent-builder": "skip",
+      "voice-agents-course": "skip",
+      "vision-agents": "skip"
+    },
+    "resourceNotes": {
+      "dmls": "Anchor your ML → LLM mental model here.",
+      "hands-on-llm": "Work through RAG and fine-tuning chapters hands-on.",
+      "rag-survey": "Canonical reference for retrieval architecture choices.",
+      "improve-accuracy": "Experiment design for LLM quality — your core skill.",
+      "eval-agents": "Apply eval rigor even if you are not shipping agents yet.",
+      "llmops": "Monitoring and regression for models in production."
+    }
+  }
+}

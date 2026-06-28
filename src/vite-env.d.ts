@@ -5,6 +5,7 @@ interface ImportMetaEnv {
   readonly SUPABASE_PUBLISHABLE_KEY?: string
   readonly VITE_PLAUSIBLE_DOMAIN?: string
   readonly VITE_SENTRY_DSN?: string
+  readonly VITE_ADMIN_EMAILS?: string
   /** @deprecated use SUPABASE_URL */
   readonly VITE_SUPABASE_URL?: string
   /** @deprecated use SUPABASE_PUBLISHABLE_KEY */
