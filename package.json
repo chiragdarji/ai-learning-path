@@ -8,6 +8,7 @@
     "prebuild": "tsx scripts/validate-content.ts && tsx scripts/generate-sitemap.ts",
     "build": "tsc -b && vite build && tsx scripts/prerender-routes.ts",
     "build:app": "tsc -b && vite build",
+    "build:vercel": "npm run prebuild && tsc -b && vite build",
     "prerender": "tsx scripts/prerender-routes.ts",
     "lint": "oxlint",
     "preview": "vite preview",

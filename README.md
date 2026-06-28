@@ -145,7 +145,7 @@ See [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
 | [Plausible](https://plausible.io) | `VITE_PLAUSIBLE_DOMAIN=vidyanix.ai` | Privacy-friendly page views |
 | [Sentry](https://sentry.io) | `VITE_SENTRY_DSN` | Error tracking in production |
 
-Build runs post-build **prerender** for SEO (`/`, `/search`, phases, etc.). Skip locally with `SKIP_PRERENDER=1 npm run build`.
+Build runs post-build **prerender** for SEO (`/`, `/search`, phases, etc.) in CI. Vercel uses `build:vercel` (no Playwright). Skip locally with `SKIP_PRERENDER=1 npm run build`.
 
 Monthly **news sync** workflow opens a PR updating `content/ai-news-radar.json` from [awesome-ai-news](https://github.com/GetStream/awesome-ai-news).
 

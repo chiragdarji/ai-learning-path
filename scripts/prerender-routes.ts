@@ -10,7 +10,8 @@ import { learningPathSchema } from '../src/schemas/content.ts'
 
 const PREVIEW_URL = 'http://127.0.0.1:4173'
 const DIST = join(import.meta.dirname, '../dist')
-const SKIP = process.env.SKIP_PRERENDER === '1'
+const SKIP =
+  process.env.SKIP_PRERENDER === '1' || process.env.VERCEL === '1'
 
 function loadRoutes(): string[] {
   const phases = learningPathSchema.parse(
@@ -56,7 +57,11 @@ function startPreview(): ChildProcess {
 
 async function main() {
   if (SKIP) {
-    console.log('SKIP_PRERENDER=1 — skipping prerender')
+    const reason =
+      process.env.SKIP_PRERENDER === '1'
+        ? 'SKIP_PRERENDER=1'
+        : 'Vercel build (use CI for prerendered HTML)'
+    console.log(`${reason} — skipping prerender`)
     return
   }
 
