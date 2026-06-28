@@ -129,7 +129,12 @@ export function AuthButton() {
 
             {message && <p className="auth-message">{message}</p>}
 
-            <button type="button" className="auth-close" onClick={() => setOpen(false)}>
+            <button
+              type="button"
+              className="auth-close"
+              aria-label="Close sign-in dialog"
+              onClick={() => setOpen(false)}
+            >
               Close
             </button>
           </div>

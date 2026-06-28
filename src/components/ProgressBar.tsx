@@ -23,6 +23,7 @@ export function ProgressBar({ completed, total, label = 'Overall progress' }: Pr
       <div
         className="progress-track"
         role="progressbar"
+        aria-label={label}
         aria-valuenow={pct}
         aria-valuemin={0}
         aria-valuemax={100}

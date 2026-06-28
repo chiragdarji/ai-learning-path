@@ -5,6 +5,10 @@ on:
     - cron: '0 10 1 * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -17,9 +21,22 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npx tsx scripts/sync-news-highlights.ts
+      - run: npm run sync:news
+      - run: npm run merge:news
 
-      - name: Report draft output
-        run: |
-          echo "Draft highlights written to content/news-highlights-draft.json"
-          echo "Copy reviewed items into content/ai-news-radar.json recentHighlights"
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'chore: sync AI news highlights from awesome-ai-news'
+          title: 'Sync AI news highlights'
+          body: |
+            Automated monthly update from [awesome-ai-news](https://github.com/GetStream/awesome-ai-news).
+
+            **Review before merge:**
+            - Theme → phase mappings in `recentHighlights`
+            - Learning action text for each headline
+          branch: chore/news-sync
+          delete-branch: true
+          labels: |
+            content
+            news-sync

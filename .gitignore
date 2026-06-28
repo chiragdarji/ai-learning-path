@@ -24,6 +24,7 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
+content/news-highlights-draft.json
 test-results/
 playwright-report/
 blob-report/

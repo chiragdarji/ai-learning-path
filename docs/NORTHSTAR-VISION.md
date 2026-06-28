@@ -13,29 +13,32 @@
 
 ---
 
-## Current State (MVP)
+## Current State (Phase C)
 
 | Layer | Status | Notes |
 |-------|--------|-------|
-| **UI** | ✅ Done | React SPA — 7 phases, Manager/Full personas, AI News Radar |
+| **UI** | ✅ Done | React SPA — 7 phases, Manager/Full personas, AI News Radar, search |
 | **Content** | ✅ JSON | ~65 resources in `content/*.json` with Zod validation at build |
-| **Progress** | ✅ Local + cloud | localStorage; optional Supabase sync when signed in |
-| **Persona** | ✅ Local + cloud | localStorage; optional Supabase sync when signed in |
+| **Progress** | ✅ Local + cloud | localStorage; merges + syncs via Supabase when signed in |
+| **Persona** | ✅ Local + cloud | localStorage; syncs to `user_profiles` when signed in |
 | **Search** | ✅ Done | Fuse.js at `/search` with type/difficulty filters |
-| **Backend** | ❌ None | No auth, sync, or CMS |
-| **Routing** | ✅ Done | React Router — `/`, `/news-radar`, `/phase/:id` |
-| **Hosting** | ✅ Done | Live at vidyanix.ai via Vercel |
+| **Backend** | ✅ Supabase | Auth (Google + magic link), Postgres progress/persona sync, RLS |
+| **Auth (prod)** | ⚠️ Configure | Vercel env vars + Supabase providers/redirect URLs (manual) |
+| **Routing** | ✅ Done | `/`, `/search`, `/news-radar`, `/privacy`, `/phase/:id` |
+| **Hosting** | ✅ Done | Live at [vidyanix.ai](https://www.vidyanix.ai) via Vercel |
 | **CI/CD** | ✅ Done | GitHub Actions lint + test + build + E2E |
 | **Tests** | ✅ Done | Vitest unit tests + Playwright E2E |
 | **Link health** | ✅ CI | Weekly link-check workflow |
-| **SEO** | ✅ Basic | OG tags, sitemap.xml, robots.txt |
+| **SEO** | ✅ Prerender | OG + sitemap; post-build HTML for key routes (C10) |
 | **Analytics** | ⚠️ Optional | Plausible via `VITE_PLAUSIBLE_DOMAIN` |
-| **Error tracking** | ❌ None | Sentry not configured (B11 deferred) |
+| **Error tracking** | ⚠️ Optional | Sentry via `VITE_SENTRY_DSN` (B11) |
 
 ### Tech stack today
 
 - Vite 8 + React 19 + TypeScript
 - Static build → `dist/`
+- Supabase (auth + Postgres sync)
+- Fuse.js (client search)
 - Oxlint + Vitest + Playwright
 - Zod content validation
 
@@ -47,8 +50,12 @@
 | `content/personas.json` | Manager vs Full track priorities |
 | `content/ai-news-radar.json` | News themes, learning bridges, highlights |
 | `src/schemas/content.ts` | Zod schemas + validation helpers |
-| `src/hooks/useProgress.ts` | localStorage progress |
-| `src/hooks/usePersona.ts` | localStorage persona |
+| `src/lib/supabase.ts` | Supabase client (env: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`) |
+| `src/services/userDataSync.ts` | Cloud progress/persona read/write |
+| `src/context/AuthProvider.tsx` | Session state, Google + magic link |
+| `src/hooks/useProgress.ts` | localStorage + cloud progress |
+| `src/hooks/usePersona.ts` | localStorage + cloud persona |
+| `supabase/migrations/001_phase_c.sql` | Tables, RLS, sign-up trigger |
 
 ---
 
@@ -104,7 +111,7 @@
 | B8 | E2E tests — Playwright | Load app, check resource, refresh, progress persists | ☑ |
 | B9 | Error boundary | Graceful UI fallback on React crashes | ☑ |
 | B10 | Analytics — Plausible or Umami | Privacy-friendly page views; no cookie banner if chosen carefully | ☑ (optional env) |
-| B11 | Error tracking — Sentry | Capture runtime errors in production | ☐ |
+| B11 | Error tracking — Sentry | Capture runtime errors in production | ☑ (optional `VITE_SENTRY_DSN`) |
 | B12 | Open Graph meta tags | Per-route title/description for sharing | ☑ |
 | B13 | `sitemap.xml` + `robots.txt` | Basic SEO for public routes | ☑ |
 
@@ -126,14 +133,16 @@
 | C4 | Migrate localStorage on login | Merge local progress into cloud on first sign-in | ☑ |
 | C5 | Persona preference in cloud | Store `swe-manager` vs `full` per user | ☑ |
 | C6 | Content workflow | JSON in repo **or** headless CMS (Sanity/Contentful) | ☑ (JSON in repo) |
-| C7 | awesome-ai-news auto-sync | GitHub Action: parse README monthly → update highlights JSON → PR | ☑ (draft script + workflow) |
+| C7 | awesome-ai-news auto-sync | GitHub Action: parse README monthly → update highlights JSON → PR | ☑ (auto PR via merge script) |
 | C8 | Search across resources | Client-side index (Fuse.js) or server search | ☑ |
 | C9 | Filter by type/difficulty/tags | UI filters on phase and global resource list | ☑ |
-| C10 | Prerender / SSG key routes | Static HTML for `/`, phases, news-radar for SEO | ☐ (OG + sitemap from Phase B) |
+| C10 | Prerender / SSG key routes | Static HTML for `/`, phases, news-radar for SEO | ☑ (post-build Playwright prerender) |
 | C11 | Privacy policy page | Required once auth + analytics exist | ☑ |
-| C12 | Accessibility audit | Lighthouse 90+ a11y; keyboard nav, focus states | ☑ (skip link, focus-visible) |
+| C12 | Accessibility audit | Lighthouse 90+ a11y; keyboard nav, focus states | ☑ (Lighthouse 93+ on homepage) |
 
 **Exit criteria:** Sign in on phone and laptop — same progress; news highlights update via automation; search works; SEO landing pages indexable.
+
+**Operational (manual):** Vercel `SUPABASE_*` env vars; Supabase auth providers + redirect URLs; optional `VITE_PLAUSIBLE_DOMAIN`, `VITE_SENTRY_DSN`. News sync opens a monthly PR for review.
 
 ---
 
@@ -187,13 +196,13 @@
                    │
          ┌─────────┴──────────┐
          ▼                    ▼
-   Vercel / Netlify      Supabase (Phase C+)
-   • CDN static          • Auth
-   • Preview deploys     • Progress sync
-   • CI from GitHub      • Optional CMS backing
+   Vercel / Netlify      Supabase (Phase C — live)
+   • CDN static          • Auth (Google, magic link)
+   • Preview deploys     • Progress + persona sync
+   • CI from GitHub      • RLS on user tables
 ```
 
-**Principle:** Stay static-first. Add backend only when auth, sync, or user-generated content require it.
+**Principle:** Stay static-first. Backend used only for auth and progress sync; content remains JSON in repo.
 
 ---
 
@@ -260,15 +269,15 @@
 | Aspect | Implementation |
 |--------|----------------|
 | **Granularity** | Per resource ID (checkbox on card) |
-| **Storage** | `localStorage` → `ai-learning-path-progress` (JSON array of IDs) |
-| **Persona** | `localStorage` → `ai-learning-path-persona` |
+| **Storage (local)** | `localStorage` → `ai-learning-path-progress` (JSON array of IDs) |
+| **Storage (cloud)** | Supabase `user_progress` when signed in |
+| **Persona (local)** | `localStorage` → `ai-learning-path-persona` |
+| **Persona (cloud)** | Supabase `user_profiles.persona_id` when signed in |
+| **On sign-in** | Local + cloud merged (union of completed IDs) |
 | **Bar (Manager)** | Essential resources only |
 | **Bar (Full)** | All non-skipped resources |
-| **Reset** | Clears all checkmarks |
-| **Sync** | None — new browser = fresh start |
-
-**Future (Phase A):** Export/import JSON  
-**Future (Phase C):** Cloud sync after auth  
+| **Reset** | Clears local + cloud progress when signed in |
+| **Export/import** | JSON file merge (works offline) |
 
 ---
 
@@ -276,7 +285,7 @@
 
 | Item | When needed |
 |------|-------------|
-| Privacy policy | Auth or analytics (Phase C) |
+| Privacy policy | ✅ Done — `/privacy` (Phase C) |
 | Cookie notice | If using analytics that require consent (EU) |
 | Affiliate disclaimer | "Curated links; not affiliated with publishers" |
 | External link policy | Opens in new tab; no embedding paid content |
@@ -299,6 +308,7 @@ npm run validate:content
 npm run test
 npm run test:e2e
 npm run check:links
+npm run migrate:supabase   # requires SUPABASE_DB_PASSWORD in .env
 ```
 
 ---
@@ -307,17 +317,17 @@ npm run check:links
 
 | Date | Decision | Rationale |
 |------|----------|-----------|
-| | Hosting: Vercel vs Netlify | |
-| | Backend: Supabase vs Firebase vs none | |
-| | CMS: JSON in repo vs Sanity | |
-| | Analytics: Plausible vs none | |
+| Jun 2026 | Hosting: Vercel | Git integration, SPA rewrites, custom domain |
+| Jun 2026 | Backend: Supabase | Auth + Postgres sync; minimal custom API |
+| Jun 2026 | CMS: JSON in repo | Phase B workflow; PR-based content edits |
+| Jun 2026 | Analytics: Plausible (optional) | Privacy-friendly; env-gated |
 
 ---
 
 ## Related docs
 
 - App README: `../README.md`
-- Content data: `../src/data/learningPath.ts`, `personas.ts`, `aiNewsRadar.ts`
+- Content data: `../content/*.json` (loaded via `../src/data/`)
 
 ---
 
