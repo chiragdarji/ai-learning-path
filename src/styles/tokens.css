@@ -1,0 +1,64 @@
+/* Design tokens — single source of truth. See docs/DESIGN-SYSTEM.md */
+:root {
+  /* ===== Existing palette (unchanged) ===== */
+  --bg-deep: #0c0f14;
+  --bg-panel: #12161e;
+  --bg-card: #181d27;
+  --bg-card-hover: #1e2430;
+  --border: #2a3140;
+  --border-soft: #1f2530;
+  --text: #9aa3b5;
+  --text-strong: #e8ecf4;
+  --text-muted: #6b7385;
+  --accent: #e8a838;
+  --accent-dim: rgba(232, 168, 56, 0.12);
+  --accent-glow: rgba(232, 168, 56, 0.25);
+  --green: #3dd68c;
+  --green-dim: rgba(61, 214, 140, 0.12);
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --sidebar-w: 280px;
+  --radius: 10px;
+  --radius-sm: 6px;
+
+  /* ===== NEW: radius ===== */
+  --radius-lg: 14px;
+
+  /* ===== NEW: spacing scale (4px base) ===== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* ===== NEW: type scale ===== */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ===== NEW: state colors (distinct from amber accent) ===== */
+  --danger: #f87171;
+  --danger-dim: rgba(248, 113, 113, 0.12);
+  --warning: #f5a623;
+  --warning-dim: rgba(245, 166, 35, 0.12);
+  --info: #60a5fa;
+  --info-dim: rgba(96, 165, 250, 0.12);
+
+  /* ===== NEW: elevation ===== */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+
+  /* ===== NEW: focus ring (WCAG keyboard nav) ===== */
+  --focus-ring: 0 0 0 3px var(--accent-glow);
+}
