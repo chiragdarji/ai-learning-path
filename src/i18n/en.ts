@@ -13,6 +13,10 @@ export const en = {
     team: 'Team',
     embed: 'Embed / API',
     admin: 'Admin',
+    learn: 'Learn',
+    myLearning: 'My learning',
+    community: 'Community',
+    account: 'Account',
   },
   auth: {
     signIn: 'Sign in to sync',
@@ -39,6 +43,23 @@ export const en = {
     linkHealth: 'Link health',
     digestSubs: 'Digest subscribers',
   },
+  myLearning: {
+    title: 'My learning',
+    progress: 'Your progress',
+    persona: 'Your track',
+    continue: 'Continue learning',
+    signInHint: 'Sign in to sync your progress across devices.',
+  },
+  communityHub: {
+    title: 'Community',
+    intro: 'Contribute resources, get the weekly digest, and learn alongside others.',
+    submit: 'Submit a resource',
+    submitSub: 'Suggest a link for the curriculum',
+    digest: 'Weekly digest',
+    digestSub: 'Essential resources in your inbox',
+    team: 'Team',
+    teamSub: 'Learn together',
+  },
 } as const
 
 export type Messages = {
@@ -47,4 +68,6 @@ export type Messages = {
   persona: Record<keyof typeof en.persona, string>
   community: Record<keyof typeof en.community, string>
   admin: Record<keyof typeof en.admin, string>
+  myLearning: Record<keyof typeof en.myLearning, string>
+  communityHub: Record<keyof typeof en.communityHub, string>
 }
