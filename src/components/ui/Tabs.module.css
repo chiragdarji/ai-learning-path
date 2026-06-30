@@ -1,0 +1,21 @@
+.list {
+  display: flex;
+  gap: var(--space-1);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-4);
+}
+.trigger {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.trigger:hover { color: var(--text-strong); }
+.trigger[data-state='active'] { color: var(--accent); border-bottom-color: var(--accent); }
+.trigger:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
