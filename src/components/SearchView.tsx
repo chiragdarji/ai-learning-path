@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import Fuse from 'fuse.js'
 import { Link } from 'react-router-dom'
+import { PageHeader } from './PageHeader'
 import type { Difficulty, ResourceType } from '../types'
 import { TYPE_LABELS } from '../types'
 import { difficultyLabel, typeIcon } from '../utils/helpers'
@@ -58,14 +59,12 @@ export function SearchView() {
 
   return (
     <div className="search-view">
-      <header className="page-header">
-        <p className="eyebrow">Browse curriculum</p>
-        <h1>Search resources</h1>
+      <PageHeader eyebrow="Browse curriculum" title="Search resources">
         <p className="lead">
           Find videos, courses, repos, and papers across all phases. Filter by type
           and difficulty.
         </p>
-      </header>
+      </PageHeader>
 
       <div className="search-controls">
         <label className="search-input-wrap">

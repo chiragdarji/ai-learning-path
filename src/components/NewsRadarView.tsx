@@ -5,6 +5,7 @@ import {
   RECENT_HIGHLIGHTS,
 } from '../data/aiNewsRadar'
 import { LEARNING_PATH } from '../data/learningPath'
+import { PageHeader } from './PageHeader'
 
 interface NewsRadarViewProps {
   onSelectPhase: (id: string) => void
@@ -28,9 +29,7 @@ export function NewsRadarView({
 }: NewsRadarViewProps) {
   return (
     <div className="news-radar">
-      <header className="page-header">
-        <p className="eyebrow">Phase 7 · Ongoing</p>
-        <h1>AI News Radar</h1>
+      <PageHeader eyebrow="Phase 7 · Ongoing" title="AI News Radar">
         <p className="lead">
           Turn headlines into learning. Scan{' '}
           <a href={AWESOME_AI_NEWS.url} target="_blank" rel="noopener noreferrer">
@@ -38,7 +37,7 @@ export function NewsRadarView({
           </a>{' '}
           monthly, map trends to curriculum, and stay ahead without chasing every launch.
         </p>
-      </header>
+      </PageHeader>
 
       <section className="news-hub-card">
         <div className="hub-card-inner">

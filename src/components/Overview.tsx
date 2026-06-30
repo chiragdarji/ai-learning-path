@@ -2,6 +2,7 @@ import { LEARNING_PATH } from '../data/learningPath'
 import type { PersonaId } from '../data/personas'
 import { PERSONAS, getResourcePriority, isEssentialTrack } from '../data/personas'
 import { PathStats } from './ProgressBar'
+import { PageHeader } from './PageHeader'
 
 import { CommunityStatBadge } from './CommunityStatBadge'
 import type { PhaseCompletionStat } from '../services/communityStats'
@@ -30,20 +31,21 @@ export function Overview({
 
   return (
     <div className="overview">
-      <header className="page-header">
-        <p className="eyebrow">
-          {isEssentialTrack(personaId)
+      <PageHeader
+        eyebrow={
+          isEssentialTrack(personaId)
             ? `Personalized for ${persona.label}`
-            : 'Curated AI Engineering Curriculum'}
-        </p>
-        <h1>
-          {isEssentialTrack(personaId)
+            : 'Curated AI Engineering Curriculum'
+        }
+        title={
+          isEssentialTrack(personaId)
             ? persona.summary.split('.')[0]
-            : 'Your path from LLM basics to production agents'}
-        </h1>
+            : 'Your path from LLM basics to production agents'
+        }
+      >
         <p className="lead">{persona.summary}</p>
         <PathStats personaId={personaId} isComplete={isComplete} />
-      </header>
+      </PageHeader>
 
       <section className="news-radar-promo">
         <div className="promo-inner">

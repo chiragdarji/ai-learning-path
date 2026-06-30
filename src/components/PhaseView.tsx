@@ -3,6 +3,7 @@ import type { PersonaId } from '../data/personas'
 import { PERSONAS, getResourcePriority, isEssentialTrack } from '../data/personas'
 import { difficultyLabel } from '../utils/helpers'
 import { ResourceCard } from './ResourceCard'
+import { PageHeader } from './PageHeader'
 import { CommunityStatBadge } from './CommunityStatBadge'
 import type { PhaseCompletionStat } from '../services/communityStats'
 
@@ -44,11 +45,10 @@ export function PhaseView({
 
   return (
     <div className="phase-view">
-      <header className="page-header">
-        <p className="eyebrow">
-          Phase {phase.number} · {difficultyLabel(phase.level)}
-        </p>
-        <h1>{phase.title}</h1>
+      <PageHeader
+        eyebrow={`Phase ${phase.number} · ${difficultyLabel(phase.level)}`}
+        title={phase.title}
+      >
         <p className="lead">{override?.description ?? phase.description}</p>
         {override?.note && <p className="phase-note">{override.note}</p>}
         <div className="phase-meta">
@@ -64,7 +64,7 @@ export function PhaseView({
             loading={communityStatsLoading}
           />
         </div>
-      </header>
+      </PageHeader>
 
       <ol className="steps-list">
         {phase.steps.map((step, index) => {
