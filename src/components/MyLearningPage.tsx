@@ -5,6 +5,7 @@ import { usePersona } from '../hooks/usePersona'
 import { useProgress } from '../hooks/useProgress'
 import { PERSONAS } from '../data/personas'
 import { Card } from './ui'
+import { PageHeader } from './PageHeader'
 import styles from './MyLearningPage.module.css'
 
 export function MyLearningPage() {
@@ -15,7 +16,7 @@ export function MyLearningPage() {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>{t.myLearning.title}</h1>
+      <PageHeader eyebrow={t.nav.myLearning} title={t.myLearning.title} />
       <div className={styles.row}>
         <Card>
           <p className={styles.label}>{t.myLearning.progress}</p>

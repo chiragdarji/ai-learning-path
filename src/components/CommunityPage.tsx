@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useLocale } from '../context/LocaleProvider'
 import { Card } from './ui'
+import { PageHeader } from './PageHeader'
 import styles from './CommunityPage.module.css'
 
 export function CommunityPage() {
@@ -12,8 +13,11 @@ export function CommunityPage() {
   ]
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>{t.communityHub.title}</h1>
-      <p className={styles.intro}>{t.communityHub.intro}</p>
+      <PageHeader
+        eyebrow={t.nav.community}
+        title={t.communityHub.title}
+        subtitle={t.communityHub.intro}
+      />
       <div className={styles.grid}>
         {links.map((l) => (
           <Link key={l.to} to={l.to} className={styles.card}>
