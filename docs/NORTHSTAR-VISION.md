@@ -453,7 +453,7 @@ Admin browser → any /admin/* screen (“Generate draft”)
 | E0c | Auth — merge confirmation | Post-sign-in toast: “X resources synced from this device” | P0 | — | ☐ |
 | E0d | Auth — professional modal | Redesign sign-in dialog to match E4 design system | P0 | E4a | ☐ |
 | E0e | Auth — sync error + offline UI | Toast + retry on Supabase error; offline badge; session expiry prompt | P0 | E0 | ☐ |
-| E4a | IA — navigation | Primary nav: Learn · My learning · Community; admin footer | P0 | Design token decision | ☐ |
+| E4a | IA — navigation | Primary nav: Learn · My learning · Community; admin in account menu. `/my` + `/community` are minimal stubs pending E2/E3. Phase nav now an in-Learn sidebar | P0 | Design token decision | ☑ |
 | E4b | IA — layouts | Overview + phase views; consistent page headers | P0 | E4a | ☐ |
 | E4c | Mobile navigation | Bottom tab bar or collapsible sidebar | P0 | E4a | ☐ |
 | E4d | Skeleton loaders | ResourceCard, PhaseView, community stats — no blank flash states | P0 | E4a | ☐ |
