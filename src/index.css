@@ -709,13 +709,6 @@ a:hover {
   flex-wrap: wrap;
 }
 
-.top-bar-account {
-  display: flex;
-  align-items: center;
-  margin-left: 1rem;
-  padding-left: 1rem;
-  border-left: 1px solid var(--border-soft);
-}
 
 .account-loading {
   font-size: 12px;
@@ -1418,14 +1411,6 @@ a:hover {
     flex-wrap: wrap;
     margin-left: 0;
     gap: 0.75rem;
-  }
-
-  .top-bar-account {
-    margin-left: 0;
-    padding-left: 0;
-    border-left: none;
-    width: 100%;
-    justify-content: flex-end;
   }
 
   .app-shell {
