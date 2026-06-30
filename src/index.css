@@ -42,7 +42,14 @@ a:hover {
 
 .app-shell {
   display: flex;
+  flex-direction: column;
   min-height: 100svh;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
 }
 
 .sidebar {
@@ -1422,6 +1429,10 @@ a:hover {
   }
 
   .app-shell {
+    flex-direction: column;
+  }
+
+  .app-body {
     flex-direction: column;
   }
 

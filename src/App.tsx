@@ -17,8 +17,10 @@ import { ProgressBar } from './components/ProgressBar'
 import { usePersonaProgress } from './hooks/usePersonaProgress'
 import { ProgressActions } from './components/ProgressActions'
 import { PersonaBanner } from './components/PersonaBanner'
-import { Sidebar } from './components/Sidebar'
-import { AuthButton } from './components/AuthButton'
+import { TopNav } from './components/TopNav'
+import { LearnSidebar } from './components/LearnSidebar'
+import { MyLearningPage } from './components/MyLearningPage'
+import { CommunityPage } from './components/CommunityPage'
 import { SearchView } from './components/SearchView'
 import { SubmitResourcePage } from './components/SubmitResourcePage'
 import { AdminPage } from './components/AdminPage'
@@ -92,6 +94,9 @@ function AppShell() {
   const progressDone = isEssentialTrack(personaId) ? essentialDone : trackDone
 
   const isPhaseView = location.pathname.startsWith('/phase/')
+  const learnPaths = ['/', '/search', '/news-radar']
+  const isLearnRoute =
+    learnPaths.includes(location.pathname) || isPhaseView
   const { getPhaseStat, loading: communityStatsLoading } = useCommunityStats()
 
   return (
@@ -99,13 +104,17 @@ function AppShell() {
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
-      <Sidebar
-        personaId={personaId}
-        completedCount={phaseCompleted}
-        totalCount={phaseTotal}
-      />
+      <TopNav />
+      <div className="app-body">
+        {isLearnRoute && (
+          <LearnSidebar
+            personaId={personaId}
+            completedCount={phaseCompleted}
+            totalCount={phaseTotal}
+          />
+        )}
 
-      <main id="main-content" className="main-content" tabIndex={-1}>
+        <main id="main-content" className="main-content" tabIndex={-1}>
         <div className="top-bar">
           <ProgressBar
             completed={progressDone}
@@ -130,9 +139,6 @@ function AppShell() {
                 onImport={importProgress}
                 onReset={reset}
               />
-            </div>
-            <div className="top-bar-account">
-              <AuthButton />
             </div>
           </div>
         </div>
@@ -159,7 +165,8 @@ function AppShell() {
             communityStatsLoading,
           }}
         />
-      </main>
+        </main>
+      </div>
     </div>
   )
 }
@@ -267,6 +274,8 @@ function App() {
     <Routes>
       <Route element={<AppShell />}>
         <Route index element={<OverviewPage />} />
+        <Route path="my" element={<MyLearningPage />} />
+        <Route path="community" element={<CommunityPage />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="news-radar" element={<NewsRadarPage />} />
         <Route path="submit" element={<SubmitResourcePage />} />
