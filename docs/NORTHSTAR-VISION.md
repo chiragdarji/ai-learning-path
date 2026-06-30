@@ -454,9 +454,9 @@ Admin browser → any /admin/* screen (“Generate draft”)
 | E0d | Auth — professional modal | Redesign sign-in dialog to match E4 design system | P0 | E4a | ☐ |
 | E0e | Auth — sync error + offline UI | Toast + retry on Supabase error; offline badge; session expiry prompt | P0 | E0 | ☐ |
 | E4a | IA — navigation | Primary nav: Learn · My learning · Community; admin in account menu. `/my` + `/community` are minimal stubs pending E2/E3. Phase nav now an in-Learn sidebar | P0 | Design token decision | ☑ |
-| E4b | IA — layouts | Overview + phase views; consistent page headers | P0 | E4a | ☐ |
+| E4b | IA — layouts | Shared `PageHeader` across all 6 routes; consistent page chrome. ResourceCard kept as-is (color-coded type/difficulty/priority badges carry info the generic `Badge` can't) | P0 | E4a | ☑ |
 | E4c | Mobile navigation | Bottom tab bar or collapsible sidebar | P0 | E4a | ☐ |
-| E4d | Skeleton loaders | ResourceCard, PhaseView, community stats — no blank flash states | P0 | E4a | ☐ |
+| E4d | Skeleton loaders | `Skeleton` primitive shipped; applied to AdminPage load. Curriculum content is static (no async resource fetch), so skeletons apply only to genuine async surfaces | P0 | E4a | ☑ |
 | E7a | `llms.txt` + site summary | Static crawler docs (parallel — no blocker) | P0 | — | ☐ |
 | E7b | JSON-LD structured data | Per-phase and per-resource schema in prerender HTML | P0 | — | ☐ |
 | N1 | GitHub README badge | `/badge/:userId` endpoint — shield.io compatible; markdown snippet in /profile | P0 | Auth (C2 ✅) | ☐ |

@@ -37,6 +37,13 @@ Import from the barrel: `import { Button, Modal } from '../components/ui'`.
 | `Modal` | Radix Dialog — focus trap, Escape, ARIA built in |
 | `Tabs` | Radix Tabs — arrow-key nav, tablist roles |
 | `Dropdown` | Radix DropdownMenu — roving focus, outside-click close |
+| `Skeleton` | Token shimmer loading placeholder; `role="status"`, `width`/`height` props |
 
 Interactive primitives wrap Radix UI, so keyboard nav and ARIA meet WCAG 2.1 AA
 without custom code.
+
+## Shared app components
+
+Beyond the `ui/` primitives, `src/components/PageHeader.tsx` is a shared header
+(eyebrow + title + optional subtitle/actions) used by every route for consistent
+page chrome. It reuses the global `.page-header` / `.eyebrow` styles.
