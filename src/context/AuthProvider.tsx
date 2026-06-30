@@ -18,6 +18,9 @@ interface AuthContextValue {
   signInWithGoogle: () => Promise<void>
   signInWithEmail: (email: string) => Promise<{ error?: string }>
   signOut: () => Promise<void>
+  signInOpen: boolean
+  openSignIn: () => void
+  closeSignIn: () => void
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
@@ -25,6 +28,9 @@ const AuthContext = createContext<AuthContextValue | null>(null)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(isSupabaseConfigured)
   const [session, setSession] = useState<Session | null>(null)
+  const [signInOpen, setSignInOpen] = useState(false)
+  const openSignIn = useCallback(() => setSignInOpen(true), [])
+  const closeSignIn = useCallback(() => setSignInOpen(false), [])
 
   useEffect(() => {
     if (!supabase) {
@@ -46,6 +52,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return () => subscription.subscription.unsubscribe()
   }, [])
+
+  useEffect(() => {
+    if (session?.user) setSignInOpen(false)
+  }, [session])
 
   const signInWithGoogle = useCallback(async () => {
     if (!supabase) return
@@ -83,8 +93,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signInWithGoogle,
       signInWithEmail,
       signOut,
+      signInOpen,
+      openSignIn,
+      closeSignIn,
     }),
-    [loading, session, signInWithGoogle, signInWithEmail, signOut],
+    [loading, session, signInWithGoogle, signInWithEmail, signOut, signInOpen, openSignIn, closeSignIn],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
