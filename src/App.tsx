@@ -18,6 +18,7 @@ import { usePersonaProgress } from './hooks/usePersonaProgress'
 import { ProgressActions } from './components/ProgressActions'
 import { PersonaBanner } from './components/PersonaBanner'
 import { TopNav } from './components/TopNav'
+import { AuthModal } from './components/AuthModal'
 import { LearnSidebar } from './components/LearnSidebar'
 import { MyLearningPage } from './components/MyLearningPage'
 import { CommunityPage } from './components/CommunityPage'
@@ -105,6 +106,7 @@ function AppShell() {
         Skip to content
       </a>
       <TopNav />
+      <AuthModal />
       <div className="app-body">
         {isLearnRoute && (
           <LearnSidebar

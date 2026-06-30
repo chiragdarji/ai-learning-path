@@ -449,10 +449,10 @@ Admin browser → any /admin/* screen (“Generate draft”)
 | # | Task | Details | Priority | Depends | Done |
 |---|------|---------|----------|---------|------|
 | E0a | Auth — guest-first policy | Document in UI: curriculum never gated; sign-in for sync/community/paths | P0 | — | ☐ |
-| E0b | Auth — contextual sign-in | Reusable prompt component at submit, team, path fork, notes | P0 | E4a | ☐ |
-| E0c | Auth — merge confirmation | Post-sign-in toast: “X resources synced from this device” | P0 | — | ☐ |
-| E0d | Auth — professional modal | Redesign sign-in dialog to match E4 design system | P0 | E4a | ☐ |
-| E0e | Auth — sync error + offline UI | Toast + retry on Supabase error; offline badge; session expiry prompt | P0 | E0 | ☐ |
+| E0b | Auth — contextual sign-in | `SignInPrompt` reusable component → `openSignIn()`; adopted on submit gate (extend to team/path/notes later) | P0 | E4a | ☑ |
+| E0c | Auth — merge confirmation | Post-sign-in toast: “X resources synced from this device” — **deferred: needs a toast/notification surface (own slice)** | P0 | — | ☐ |
+| E0d | Auth — professional modal | App-level `AuthModal` on Modal/Input/Button primitives (Radix focus trap, ESC, ARIA); opened via `openSignIn()` context | P0 | E4a | ☑ |
+| E0e | Auth — sync error + offline UI | Toast + retry on Supabase error; offline badge; session expiry prompt — **deferred: needs the same toast surface as E0c** | P0 | E0 | ☐ |
 | E4a | IA — navigation | Primary nav: Learn · My learning · Community; admin in account menu. `/my` + `/community` are minimal stubs pending E2/E3. Phase nav now an in-Learn sidebar | P0 | Design token decision | ☑ |
 | E4b | IA — layouts | Shared `PageHeader` across all 6 routes; consistent page chrome. ResourceCard kept as-is (color-coded type/difficulty/priority badges carry info the generic `Badge` can't) | P0 | E4a | ☑ |
 | E4c | Mobile navigation | Bottom tab bar or collapsible sidebar | P0 | E4a | ☐ |
