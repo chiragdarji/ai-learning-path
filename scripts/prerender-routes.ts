@@ -8,7 +8,9 @@ import { dirname, join } from 'node:path'
 import { chromium } from 'playwright'
 import { learningPathSchema } from '../src/schemas/content.ts'
 
-const PREVIEW_URL = 'http://127.0.0.1:4173'
+// Use a dedicated port so prerender never collides with Playwright's
+// e2e webServer (4173) when both run in the same CI job.
+const PREVIEW_URL = 'http://127.0.0.1:4178'
 const DIST = join(import.meta.dirname, '../dist')
 const SKIP =
   process.env.SKIP_PRERENDER === '1' || process.env.VERCEL === '1'
@@ -50,7 +52,7 @@ async function waitForServer(ms = 60_000): Promise<void> {
 function startPreview(): ChildProcess {
   return spawn(
     'npm',
-    ['run', 'preview', '--', '--host', '127.0.0.1', '--port', '4173'],
+    ['run', 'preview', '--', '--host', '127.0.0.1', '--port', '4178'],
     { stdio: 'ignore', shell: true, cwd: join(import.meta.dirname, '..') },
   )
 }
