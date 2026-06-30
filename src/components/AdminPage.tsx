@@ -9,6 +9,7 @@ import {
   type ResourceSubmission,
 } from '../services/communityFeatures'
 import { fetchUserProfile, isAdminEmail } from '../services/userProfile'
+import { Skeleton } from './ui'
 
 export function AdminPage() {
   const { user } = useAuth()
@@ -52,7 +53,14 @@ export function AdminPage() {
     )
   }
 
-  if (loading) return <p className="account-loading">Loading admin…</p>
+  if (loading)
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: '480px' }}>
+        <Skeleton height="2rem" width="200px" />
+        <Skeleton height="1rem" />
+        <Skeleton height="1rem" width="80%" />
+      </div>
+    )
 
   if (!isAdmin) {
     return (
