@@ -18,6 +18,7 @@ import { usePersonaProgress } from './hooks/usePersonaProgress'
 import { ProgressActions } from './components/ProgressActions'
 import { PersonaBanner } from './components/PersonaBanner'
 import { TopNav } from './components/TopNav'
+import { MobileTabBar } from './components/MobileTabBar'
 import { AuthModal } from './components/AuthModal'
 import { LearnSidebar } from './components/LearnSidebar'
 import { MyLearningPage } from './components/MyLearningPage'
@@ -169,6 +170,7 @@ function AppShell() {
         />
         </main>
       </div>
+      <MobileTabBar />
     </div>
   )
 }

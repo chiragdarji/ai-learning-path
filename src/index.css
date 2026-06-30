@@ -1463,7 +1463,8 @@ a:hover {
   }
 
   .main-content {
-    padding: 1.5rem 1rem 3rem;
+    /* Clear the fixed 60px MobileTabBar (+ safe area) at the bottom. */
+    padding: 1.5rem 1rem calc(60px + env(safe-area-inset-bottom) + 1.5rem);
   }
 }
 
