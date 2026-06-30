@@ -1,0 +1,36 @@
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5);
+}
+.title {
+  font-family: var(--serif);
+  font-size: var(--text-2xl);
+  color: var(--text-strong);
+  margin: 0 0 var(--space-2);
+}
+.intro {
+  font-size: var(--text-base);
+  color: var(--text-muted);
+  margin: 0 0 var(--space-6);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+.card {
+  text-decoration: none;
+  display: block;
+}
+.cardTitle {
+  font-size: var(--text-lg);
+  color: var(--text-strong);
+  font-weight: var(--weight-semibold);
+  margin: 0 0 var(--space-1);
+}
+.cardSub {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin: 0;
+}

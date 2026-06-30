@@ -15,6 +15,10 @@ export const es: Messages = {
     team: 'Equipo',
     embed: 'Embed / API',
     admin: 'Admin',
+    learn: 'Aprender',
+    myLearning: 'Mi aprendizaje',
+    community: 'Comunidad',
+    account: 'Cuenta',
   },
   auth: {
     signIn: 'Iniciar sesión',
@@ -40,5 +44,22 @@ export const es: Messages = {
     submissions: 'Envíos pendientes',
     linkHealth: 'Estado de enlaces',
     digestSubs: 'Suscriptores del resumen',
+  },
+  myLearning: {
+    title: 'Mi aprendizaje',
+    progress: 'Tu progreso',
+    persona: 'Tu ruta',
+    continue: 'Seguir aprendiendo',
+    signInHint: 'Inicia sesión para sincronizar tu progreso entre dispositivos.',
+  },
+  communityHub: {
+    title: 'Comunidad',
+    intro: 'Contribuye recursos, recibe el resumen semanal y aprende junto a otros.',
+    submit: 'Enviar un recurso',
+    submitSub: 'Sugiere un enlace para el plan',
+    digest: 'Resumen semanal',
+    digestSub: 'Recursos esenciales en tu correo',
+    team: 'Equipo',
+    teamSub: 'Aprende en equipo',
   },
 }

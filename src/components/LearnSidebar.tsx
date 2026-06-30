@@ -7,13 +7,13 @@ import { difficultyLabel } from '../utils/helpers'
 import { useLocale } from '../context/LocaleProvider'
 import { CURRICULUM_META } from '../data/meta'
 
-interface SidebarProps {
+interface LearnSidebarProps {
   personaId: PersonaId
   completedCount: (phase: Phase) => number
   totalCount: (phase: Phase) => number
 }
 
-export function Sidebar({ personaId, completedCount, totalCount }: SidebarProps) {
+export function LearnSidebar({ personaId, completedCount, totalCount }: LearnSidebarProps) {
   const { t, locale, setLocale } = useLocale()
   const persona = PERSONAS[personaId]
   const orderedPhases = persona.phaseOrder
@@ -24,14 +24,6 @@ export function Sidebar({ personaId, completedCount, totalCount }: SidebarProps)
 
   return (
     <nav className="sidebar" aria-label="Course navigation">
-      <div className="sidebar-brand">
-        <span className="brand-mark">AI</span>
-        <div>
-          <strong>Learning Path</strong>
-          <small>{persona.label}</small>
-        </div>
-      </div>
-
       <NavLink
         to="/"
         end
@@ -92,38 +84,6 @@ export function Sidebar({ personaId, completedCount, totalCount }: SidebarProps)
           )
         })}
       </ol>
-
-      <div className="nav-divider">Community</div>
-      <NavLink to="/submit" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <span className="nav-num">+</span>
-        <span className="nav-text">
-          <strong>{t.nav.submit}</strong>
-        </span>
-      </NavLink>
-      <NavLink to="/digest" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <span className="nav-num">✉</span>
-        <span className="nav-text">
-          <strong>{t.nav.digest}</strong>
-        </span>
-      </NavLink>
-      <NavLink to="/team" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <span className="nav-num">👥</span>
-        <span className="nav-text">
-          <strong>{t.nav.team}</strong>
-        </span>
-      </NavLink>
-      <NavLink to="/embed" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <span className="nav-num">{`</>`}</span>
-        <span className="nav-text">
-          <strong>{t.nav.embed}</strong>
-        </span>
-      </NavLink>
-      <NavLink to="/admin" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-        <span className="nav-num">⚙</span>
-        <span className="nav-text">
-          <strong>{t.nav.admin}</strong>
-        </span>
-      </NavLink>
 
       <div className="sidebar-footer">
         <p className="curriculum-version" title={CURRICULUM_META.description}>
