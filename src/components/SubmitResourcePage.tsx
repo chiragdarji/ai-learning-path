@@ -4,6 +4,7 @@ import { LEARNING_PATH } from '../data/learningPath'
 import { useAuth } from '../context/AuthProvider'
 import { useLocale } from '../context/LocaleProvider'
 import { submitResource } from '../services/communityFeatures'
+import { SignInPrompt } from './SignInPrompt'
 
 export function SubmitResourcePage() {
   const { user } = useAuth()
@@ -20,7 +21,7 @@ export function SubmitResourcePage() {
   if (!user) {
     return (
       <article className="community-page">
-        <p>Sign in to suggest resources for the curriculum.</p>
+        <SignInPrompt message="Sign in to suggest resources for the curriculum." />
         <Link to="/">← Back to overview</Link>
       </article>
     )
