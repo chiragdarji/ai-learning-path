@@ -34,6 +34,8 @@ import { useProgress } from './hooks/useProgress'
 import { usePersona } from './hooks/usePersona'
 import { useCommunityStats } from './hooks/useCommunityStats'
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, usePageMeta } from './hooks/usePageMeta'
+import { useJsonLd } from './hooks/useJsonLd'
+import { curriculumJsonLd, phaseCourseJsonLd } from './lib/jsonLd'
 import type { PhaseCompletionStat } from './services/communityStats'
 import type { Phase } from './types'
 import { getResourcePriority, isEssentialTrack } from './data/personas'
@@ -189,6 +191,7 @@ function OverviewPage() {
     useOutletContext<OutletContext>()
   const navigate = useNavigate()
   usePageMeta(DEFAULT_TITLE, DEFAULT_DESCRIPTION, '/')
+  useJsonLd(useMemo(() => curriculumJsonLd(LEARNING_PATH), []))
 
   return (
     <Overview
@@ -237,6 +240,7 @@ function PhasePage() {
     phase?.description ?? DEFAULT_DESCRIPTION,
     phaseId ? `/phase/${phaseId}` : '/',
   )
+  useJsonLd(useMemo(() => (phase ? phaseCourseJsonLd(phase) : null), [phase]))
 
   if (!phase) {
     return <Navigate to="/" replace />
