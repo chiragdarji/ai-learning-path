@@ -38,8 +38,8 @@
 | **Routing** | ✅ Done | `/`, `/search`, `/news-radar`, `/phase/:id`, community routes |
 | **Hosting** | ✅ Done | Vercel + custom domain |
 | **CI/CD** | ✅ Done | Lint, test, build, E2E, link-check, news sync, weekly digest artifact |
-| **SEO** | ⚠️ Partial | OG, sitemap, CI prerender; production SPA-only; no `llms.txt` / JSON-LD |
-| **AI discoverability** | ❌ Not started | No `llms.txt`, structured resource schema, or AI-oriented summaries |
+| **SEO** | ✅ E7 | OG, sitemap, prerender + **JSON-LD** (`Course`/`ItemList`) in static HTML (E7b) |
+| **AI discoverability** | ✅ E7a | `llms.txt` generated from curriculum; JSON-LD structured data; public JSON API |
 | **Analytics** | ⚠️ Optional | Plausible via `VITE_PLAUSIBLE_DOMAIN` |
 | **Error tracking** | ⚠️ Optional | Sentry via `VITE_SENTRY_DSN` |
 | **Community stats** | ✅ D1 | Anonymous phase completion % (5+ learners) |
@@ -458,7 +458,7 @@ Admin browser → any /admin/* screen (“Generate draft”)
 | E4c | Mobile navigation | `MobileTabBar` fixed bottom-tab primary nav (≤768px); top-nav primary links hide on mobile; content padded to clear the bar | P0 | E4a | ☑ |
 | E4d | Skeleton loaders | `Skeleton` primitive shipped; applied to AdminPage load. Curriculum content is static (no async resource fetch), so skeletons apply only to genuine async surfaces | P0 | E4a | ☑ |
 | E7a | `llms.txt` + site summary | `scripts/generate-llms-txt.ts` writes `public/llms.txt` from curriculum content (wired into prebuild) — stays in sync with phases | P0 | — | ☑ |
-| E7b | JSON-LD structured data | Per-phase and per-resource schema in prerender HTML | P0 | — | ☐ |
+| E7b | JSON-LD structured data | `useJsonLd` hook injects schema.org `Course` (phase pages) + `ItemList` (overview); captured in prerendered HTML (verified in `dist/`). Per-resource schema deferred | P0 | — | ☑ |
 | N1 | GitHub README badge | **Deferred → bundle with E2.** Shields.io *endpoint* badge fed by a Vercel fn `api/badge/[userId].ts` → new `get_user_progress_badge(uuid)` **SECURITY DEFINER** RPC (aggregate % only, no PII, granted to `anon` — mirrors `get_public_completion_stats`). Snippet surfaced via "Copy badge" on `/profile`. **Data-exposure note:** makes any UUID's completion % publicly queryable (opt-in by sharing). Depends E2 | P1 | E2 | ☐ |
 | E2 | Profile page `/profile` | Identity, progress, persona, paths, notes, teams, digest, export; **GDPR data delete** | P1 | E4, E0 | ☐ |
 | E8e | Smart next-step hints | Rule-based “what’s next” from persona + progress (no LLM) | P1 | E4 | ☐ |
