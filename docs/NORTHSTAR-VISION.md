@@ -457,7 +457,7 @@ Admin browser → any /admin/* screen (“Generate draft”)
 | E4b | IA — layouts | Shared `PageHeader` across all 6 routes; consistent page chrome. ResourceCard kept as-is (color-coded type/difficulty/priority badges carry info the generic `Badge` can't) | P0 | E4a | ☑ |
 | E4c | Mobile navigation | `MobileTabBar` fixed bottom-tab primary nav (≤768px); top-nav primary links hide on mobile; content padded to clear the bar | P0 | E4a | ☑ |
 | E4d | Skeleton loaders | `Skeleton` primitive shipped; applied to AdminPage load. Curriculum content is static (no async resource fetch), so skeletons apply only to genuine async surfaces | P0 | E4a | ☑ |
-| E7a | `llms.txt` + site summary | Static crawler docs (parallel — no blocker) | P0 | — | ☐ |
+| E7a | `llms.txt` + site summary | `scripts/generate-llms-txt.ts` writes `public/llms.txt` from curriculum content (wired into prebuild) — stays in sync with phases | P0 | — | ☑ |
 | E7b | JSON-LD structured data | Per-phase and per-resource schema in prerender HTML | P0 | — | ☐ |
 | N1 | GitHub README badge | `/badge/:userId` endpoint — shield.io compatible; markdown snippet in /profile | P0 | Auth (C2 ✅) | ☐ |
 | E2 | Profile page `/profile` | Identity, progress, persona, paths, notes, teams, digest, export; **GDPR data delete** | P1 | E4, E0 | ☐ |
