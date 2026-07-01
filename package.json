@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "tsx scripts/validate-content.ts && tsx scripts/generate-sitemap.ts && tsx scripts/generate-curriculum-api.ts",
+    "prebuild": "tsx scripts/validate-content.ts && tsx scripts/generate-sitemap.ts && tsx scripts/generate-curriculum-api.ts && tsx scripts/generate-llms-txt.ts",
     "build": "tsc -b && vite build && tsx scripts/prerender-routes.ts",
     "build:app": "tsc -b && vite build",
     "build:vercel": "npm run prebuild && tsc -b && vite build",
