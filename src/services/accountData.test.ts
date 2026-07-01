@@ -17,20 +17,6 @@ vi.mock('../lib/supabase', () => ({
 
 import { deleteAccountData } from './accountData'
 
-const store: Record<string, string> = {}
-vi.stubGlobal('localStorage', {
-  getItem: (k: string) => (k in store ? store[k] : null),
-  setItem: (k: string, v: string) => {
-    store[k] = v
-  },
-  removeItem: (k: string) => {
-    delete store[k]
-  },
-  clear: () => {
-    for (const k of Object.keys(store)) delete store[k]
-  },
-})
-
 beforeEach(() => {
   for (const k of Object.keys(tables)) delete tables[k]
   localStorage.clear()
