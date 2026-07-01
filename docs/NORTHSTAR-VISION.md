@@ -460,7 +460,7 @@ Admin browser → any /admin/* screen (“Generate draft”)
 | E7a | `llms.txt` + site summary | `scripts/generate-llms-txt.ts` writes `public/llms.txt` from curriculum content (wired into prebuild) — stays in sync with phases | P0 | — | ☑ |
 | E7b | JSON-LD structured data | `useJsonLd` hook injects schema.org `Course` (phase pages) + `ItemList` (overview); captured in prerendered HTML (verified in `dist/`). Per-resource schema deferred | P0 | — | ☑ |
 | N1 | GitHub README badge | **Deferred → bundle with E2.** Shields.io *endpoint* badge fed by a Vercel fn `api/badge/[userId].ts` → new `get_user_progress_badge(uuid)` **SECURITY DEFINER** RPC (aggregate % only, no PII, granted to `anon` — mirrors `get_public_completion_stats`). Snippet surfaced via "Copy badge" on `/profile`. **Data-exposure note:** makes any UUID's completion % publicly queryable (opt-in by sharing). Depends E2 | P1 | E2 | ☐ |
-| E2 | Profile page `/profile` | Identity, progress, persona, paths, notes, teams, digest, export; **GDPR data delete** | P1 | E4, E0 | ☐ |
+| E2 | Profile hub `/my` + `/my/account` | `/my` learning launchpad (header, Continue, per-phase, track); `/my/account` settings (digest, export/import, danger zone); global `SiteFooter`; account menu holds sign-out; honest full data delete (migration 004). Paths/notes/teams + N1 badge + E0c/E0e toast still pending | P1 | E4, E0 | ☑ |
 | E8e | Smart next-step hints | Rule-based “what’s next” from persona + progress (no LLM) | P1 | E4 | ☐ |
 | E9 | Platform onboarding | First-run: pick persona **or** browse official (guest OK); capture role + goal for E16 matching | P1 | E4 | ☐ |
 | E8a | User paths — data model | `user_paths`, `user_path_nodes` — **requires auth** | P1 | E2 | ☐ |
