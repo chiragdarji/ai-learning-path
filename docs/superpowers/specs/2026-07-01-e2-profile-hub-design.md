@@ -10,7 +10,7 @@
 
 ## Goals
 
-- Give signed-in users a single hub to see progress, manage their track, control their data, and jump back into learning.
+- Give users a focused `/my` learning launchpad (progress, next step, track) and a separate `/my/account` for administrative settings — split so neither page is cluttered.
 - Stay **guest-first**: signed-out users still see their local progress and a contextual sign-in prompt — never a wall.
 - Reuse the design system (`Card`, `Button`, `Input`, `Modal`, `Skeleton`, `PageHeader`) and existing hooks/services; add only what's missing.
 - Ship an honest **"delete my data"** (all user-owned rows), the trust feature the North Star emphasizes.
@@ -24,26 +24,37 @@
 
 ---
 
-## Information architecture (approved)
+## Information architecture (approved — decluttered v2)
 
-A **single scannable page**, ordered by frequency of use so the common case needs no scrolling and destructive actions are isolated. Not tabs — the content is modest and stacks cleanly on mobile.
+Split **frequent (learning) from rare (account/settings)** across two focused pages, move identity + sign out into the top-nav account menu, and give the whole site a global footer. This keeps `/my` a clean launchpad instead of one dense page. Section labels are **sentence case** (design-system rule), not the ALL-CAPS of the first draft.
 
-1. **Identity header** — avatar, email, track + sync status, sign out. Guests: "Browsing as guest" + "Sign in to sync" (opens the existing `AuthModal` via `openSignIn()`).
-2. **Your learning** — three metric cards (overall %, resources done/total, current phase); a **"Continue where you left off"** launch card (next unstarted resource); per-phase progress bars; track (persona) selector.
-3. **Account and data** — one quiet card: weekly digest subscribe, progress export/import, language, privacy link.
-4. **Danger zone** — red-accented card: reset progress, delete my data. Both behind a confirm `Modal`.
+**Page 1 — `/my` ("My learning"): learning only.**
+1. Lightweight header — "Your learning" + a one-line summary (e.g. "40 of 65 done · 62%"). No avatar/email/sign-out here (that's in the nav account menu). Guests: "Browsing as guest" + "Sign in to sync" (opens the existing `AuthModal` via `openSignIn()`).
+2. **"Continue where you left off"** — the hero launch card (next unstarted resource).
+3. Per-phase progress rows (compact).
+4. Track (persona) selector.
+
+**Page 2 — `/my/account` ("Account settings"): rare/administrative.** Reached from the account menu.
+1. Preferences — weekly digest subscribe, progress export/import.
+2. **Danger zone** (bottom, red-accented) — reset progress, delete my data. Both behind a confirm `Modal`.
+
+**Top-nav account menu** (extend the existing `TopNav` `Dropdown`): email + track · Account settings (`/my/account`) · Privacy · **Sign out**.
+
+**Global footer** (new, `AppShell`, every page): curriculum version · Privacy · Curriculum API · llms.txt · language switch. This **replaces** the footer block currently inside `LearnSidebar` (removed there) and removes language/privacy from the profile entirely.
 
 ## Guest vs signed-in behavior
 
 | Element | Guest (local only) | Signed in |
 |---------|--------------------|-----------|
-| Identity header | "Browsing as guest" + Sign in to sync | Email + avatar + Sign out |
+| Nav account menu | shows "Sign in to sync" | email · Account settings · Sign out |
+| `/my` header | "Browsing as guest" + Sign in to sync | "Your learning" + summary |
 | Metrics / per-phase / Continue | ✅ from localStorage | ✅ (cloud-synced) |
 | Track selector | ✅ local | ✅ cloud |
-| Export / import | ✅ | ✅ |
-| Reset progress | ✅ (local) | ✅ (local + cloud) |
-| Weekly digest | Prompt sign-in (email tied to profile) | ✅ |
-| Delete my data | Hidden (nothing server-side to delete) | ✅ |
+| Export / import (`/my/account`) | ✅ | ✅ |
+| Reset progress (`/my/account`) | ✅ (local) | ✅ (local + cloud) |
+| Weekly digest (`/my/account`) | Prompt sign-in | ✅ |
+| Delete my data (`/my/account`) | Hidden (nothing server-side to delete) | ✅ |
+| Language / privacy | Global footer | Global footer |
 
 ---
 
@@ -51,16 +62,23 @@ A **single scannable page**, ordered by frequency of use so the common case need
 
 New files under `src/components/profile/` (one clear responsibility each; each testable in isolation with `renderWithProviders`):
 
-| Component | Responsibility | Consumes |
-|-----------|----------------|----------|
-| `ProfilePage.tsx` | Route component at `/my`; composes the sections; owns no logic beyond wiring | hooks below |
-| `ProfileHeader.tsx` | Identity strip / guest strip | `useAuth` |
-| `ProgressOverview.tsx` | Metric cards + Continue card + per-phase bars | progress helpers |
-| `TrackSelector.tsx` | Persona view + change | `usePersona` |
-| `AccountDataCard.tsx` | Digest subscribe, export/import, language, privacy | `useProgress`, `useLocale`, `subscribeDigest` |
-| `DangerZone.tsx` | Reset + delete, each with a confirm `Modal` | `useProgress`, `deleteAccountData`, `useAuth` |
+| Component | Route/where | Responsibility | Consumes |
+|-----------|-------------|----------------|----------|
+| `ProfilePage.tsx` | `/my` | Composes the learning-only page | hooks below |
+| `ProfileHeader.tsx` | `/my` | "Your learning" + summary; guest strip with Sign in to sync | `useAuth`, progress helpers |
+| `ProgressOverview.tsx` | `/my` | Continue card + per-phase rows | progress helpers |
+| `TrackSelector.tsx` | `/my` | Persona view + change | `usePersona` |
+| `AccountSettingsPage.tsx` | `/my/account` | Composes the settings page | hooks below |
+| `AccountPreferences.tsx` | `/my/account` | Digest subscribe, export/import | `useProgress`, `subscribeDigest` |
+| `DangerZone.tsx` | `/my/account` | Reset + delete, each with a confirm `Modal` | `useProgress`, `deleteAccountData`, `useAuth` |
+| `SiteFooter.tsx` | `AppShell` (global) | Version, privacy, API, llms.txt, language switch | `useLocale` |
 
-`ProfilePage` replaces `MyLearningPage` (delete `MyLearningPage.tsx` + its module.css after wiring; update the import in `App.tsx`). The route stays `/my`.
+`ProfilePage` replaces `MyLearningPage` (delete `MyLearningPage.tsx` + its module.css after wiring). Route changes in `App.tsx`: keep `/my`, add `/my/account`.
+
+**Edits to existing components:**
+- `TopNav.tsx` — the account `Dropdown`: for signed-in users show email (label) + "Account settings" (→ `/my/account`) + existing items + "Sign out" (`signOut()`); for guests keep "Sign in". This moves sign-out off the profile page.
+- `LearnSidebar.tsx` — **remove** the `sidebar-footer` block (version, locale switch, privacy); the global `SiteFooter` owns these now. Sidebar becomes phases + discovery only.
+- `AppShell` (`App.tsx`) — render `<SiteFooter />` after `.app-body` (below the mobile tab bar considerations; footer sits at page bottom on all routes).
 
 ## Shared logic (new, pure + tested)
 
@@ -96,10 +114,13 @@ New files under `src/components/profile/` (one clear responsibility each; each t
 
 - **Pure logic** (`progressSummary.ts`): unit-test `phaseProgress` (overall + per-phase totals, persona-aware) and `nextResource` (returns first incomplete; `null` when done) with a small fixed curriculum fixture. TDD.
 - **Components** with `renderWithProviders`:
-  - `ProfileHeader`: guest shows "Sign in to sync" → click calls `openSignIn`; signed-in shows email + Sign out.
-  - `ProgressOverview`: renders overall %, a Continue link to the next resource, and one row per phase.
+  - `ProfileHeader`: guest shows "Sign in to sync" → click calls `openSignIn`; signed-in shows "Your learning" + summary.
+  - `ProgressOverview`: renders a Continue link to the next resource and one row per phase.
   - `TrackSelector`: changing the select updates persona.
+  - `AccountPreferences`: renders digest + export/import controls.
   - `DangerZone`: "Delete…" opens a confirm `Modal`; confirming calls `deleteAccountData`; reset opens its own confirm.
+  - `SiteFooter`: renders version, privacy link, and the language switch (changing it calls `setLocale`).
+  - `TopNav` (updated): signed-in account menu includes "Account settings" and "Sign out" (→ `signOut`).
 - **Service** (`accountData.ts`): unit-test the delete sequence against a mocked Supabase client (each table's `.delete().eq()` called; stops on first error; localStorage cleared on success).
 - Full suite + lint + `tsc` + `vite build` green; browser smoke check of `/my` in both guest and signed-in states.
 
@@ -109,6 +130,8 @@ New files under `src/components/profile/` (one clear responsibility each; each t
 
 ## Success criteria
 
-- A guest sees local progress + a sign-in prompt on `/my`; a signed-in user sees synced progress, can change track, export/import/reset, subscribe to the digest, and delete their data honestly.
+- `/my` is a focused learning launchpad (header + Continue + per-phase + track) — not a dense settings dump; guests see local progress + a sign-in prompt.
+- `/my/account` holds preferences (digest, backup) and the danger zone (reset, honest full delete); reached from the nav account menu, which also holds Sign out.
+- A global `SiteFooter` (version, privacy, API, llms.txt, language) shows on every page; the `LearnSidebar` footer is removed (no duplication).
 - "Continue where you left off" jumps to the correct next resource.
-- Everything reuses the design system; no new nav; mobile stacks cleanly.
+- Everything reuses the design system; mobile stacks cleanly.
