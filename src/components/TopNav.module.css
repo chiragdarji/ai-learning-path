@@ -30,6 +30,13 @@
   display: flex;
   gap: var(--space-2);
 }
+
+/* On mobile the primary nav lives in the fixed bottom MobileTabBar. */
+@media (max-width: 768px) {
+  .primary {
+    display: none;
+  }
+}
 .link {
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-sm);
