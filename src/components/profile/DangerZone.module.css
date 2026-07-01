@@ -1,0 +1,33 @@
+.zone {
+  background: var(--danger-dim);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-4);
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--danger);
+}
+.row:last-child {
+  border-bottom: none;
+}
+.rowText {
+  color: var(--danger);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+.rowSub {
+  color: var(--danger);
+  opacity: 0.8;
+  font-size: var(--text-xs);
+  margin: 2px 0 0;
+}
+.msg {
+  color: var(--danger);
+  font-size: var(--text-xs);
+  margin: var(--space-2) 0 0;
+}

@@ -8,9 +8,9 @@ export function AuthModal() {
   const [message, setMessage] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
 
-  // The modal is only opened via openSignIn(), whose triggers (AuthButton,
-  // SignInPrompt) are themselves gated on `configured`; Modal renders nothing
-  // while closed, so no extra guard is needed here.
+  // The modal is only opened via openSignIn(), whose triggers (the TopNav
+  // sign-in button and SignInPrompt); Modal renders nothing while closed, so
+  // no extra guard is needed here.
   return (
     <Modal
       open={signInOpen}

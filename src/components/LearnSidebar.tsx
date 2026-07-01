@@ -5,7 +5,6 @@ import type { PersonaId } from '../data/personas'
 import { isEssentialTrack, PERSONAS } from '../data/personas'
 import { difficultyLabel } from '../utils/helpers'
 import { useLocale } from '../context/LocaleProvider'
-import { CURRICULUM_META } from '../data/meta'
 
 interface LearnSidebarProps {
   personaId: PersonaId
@@ -14,7 +13,7 @@ interface LearnSidebarProps {
 }
 
 export function LearnSidebar({ personaId, completedCount, totalCount }: LearnSidebarProps) {
-  const { t, locale, setLocale } = useLocale()
+  const { t } = useLocale()
   const persona = PERSONAS[personaId]
   const orderedPhases = persona.phaseOrder
     .map((id) => LEARNING_PATH.find((p) => p.id === id))
@@ -85,24 +84,6 @@ export function LearnSidebar({ personaId, completedCount, totalCount }: LearnSid
         })}
       </ol>
 
-      <div className="sidebar-footer">
-        <p className="curriculum-version" title={CURRICULUM_META.description}>
-          {t.community.curriculumVersion}: {CURRICULUM_META.version}
-        </p>
-        <label className="locale-switch">
-          <span className="sr-only">Language</span>
-          <select
-            value={locale}
-            onChange={(e) => setLocale(e.target.value === 'es' ? 'es' : 'en')}
-          >
-            <option value="en">English</option>
-            <option value="es">Español</option>
-          </select>
-        </label>
-        <NavLink to="/privacy" className="sidebar-footer-link">
-          {t.nav.privacy}
-        </NavLink>
-      </div>
     </nav>
   )
 }

@@ -19,9 +19,11 @@ import { ProgressActions } from './components/ProgressActions'
 import { PersonaBanner } from './components/PersonaBanner'
 import { TopNav } from './components/TopNav'
 import { MobileTabBar } from './components/MobileTabBar'
+import { SiteFooter } from './components/SiteFooter'
 import { AuthModal } from './components/AuthModal'
 import { LearnSidebar } from './components/LearnSidebar'
-import { MyLearningPage } from './components/MyLearningPage'
+import { ProfilePage } from './components/profile/ProfilePage'
+import { AccountSettingsPage } from './components/profile/AccountSettingsPage'
 import { CommunityPage } from './components/CommunityPage'
 import { SearchView } from './components/SearchView'
 import { SubmitResourcePage } from './components/SubmitResourcePage'
@@ -172,6 +174,7 @@ function AppShell() {
         />
         </main>
       </div>
+      <SiteFooter />
       <MobileTabBar />
     </div>
   )
@@ -282,7 +285,8 @@ function App() {
     <Routes>
       <Route element={<AppShell />}>
         <Route index element={<OverviewPage />} />
-        <Route path="my" element={<MyLearningPage />} />
+        <Route path="my" element={<ProfilePage />} />
+        <Route path="my/account" element={<AccountSettingsPage />} />
         <Route path="community" element={<CommunityPage />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="news-radar" element={<NewsRadarPage />} />
