@@ -459,7 +459,7 @@ Admin browser → any /admin/* screen (“Generate draft”)
 | E4d | Skeleton loaders | `Skeleton` primitive shipped; applied to AdminPage load. Curriculum content is static (no async resource fetch), so skeletons apply only to genuine async surfaces | P0 | E4a | ☑ |
 | E7a | `llms.txt` + site summary | `scripts/generate-llms-txt.ts` writes `public/llms.txt` from curriculum content (wired into prebuild) — stays in sync with phases | P0 | — | ☑ |
 | E7b | JSON-LD structured data | Per-phase and per-resource schema in prerender HTML | P0 | — | ☐ |
-| N1 | GitHub README badge | `/badge/:userId` endpoint — shield.io compatible; markdown snippet in /profile | P0 | Auth (C2 ✅) | ☐ |
+| N1 | GitHub README badge | **Deferred → bundle with E2.** Shields.io *endpoint* badge fed by a Vercel fn `api/badge/[userId].ts` → new `get_user_progress_badge(uuid)` **SECURITY DEFINER** RPC (aggregate % only, no PII, granted to `anon` — mirrors `get_public_completion_stats`). Snippet surfaced via "Copy badge" on `/profile`. **Data-exposure note:** makes any UUID's completion % publicly queryable (opt-in by sharing). Depends E2 | P1 | E2 | ☐ |
 | E2 | Profile page `/profile` | Identity, progress, persona, paths, notes, teams, digest, export; **GDPR data delete** | P1 | E4, E0 | ☐ |
 | E8e | Smart next-step hints | Rule-based “what’s next” from persona + progress (no LLM) | P1 | E4 | ☐ |
 | E9 | Platform onboarding | First-run: pick persona **or** browse official (guest OK); capture role + goal for E16 matching | P1 | E4 | ☐ |
