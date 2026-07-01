@@ -20,4 +20,9 @@ describe('TopNav', () => {
     renderWithProviders(<TopNav />)
     expect(screen.getByText('AI')).toBeInTheDocument()
   })
+
+  it('shows the sign-in control for signed-out users', () => {
+    renderWithProviders(<TopNav />)
+    expect(screen.getByRole('button', { name: /Sign in to sync/i })).toBeInTheDocument()
+  })
 })
