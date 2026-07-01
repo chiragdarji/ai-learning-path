@@ -19,6 +19,7 @@ import { ProgressActions } from './components/ProgressActions'
 import { PersonaBanner } from './components/PersonaBanner'
 import { TopNav } from './components/TopNav'
 import { MobileTabBar } from './components/MobileTabBar'
+import { SiteFooter } from './components/SiteFooter'
 import { AuthModal } from './components/AuthModal'
 import { LearnSidebar } from './components/LearnSidebar'
 import { MyLearningPage } from './components/MyLearningPage'
@@ -172,6 +173,7 @@ function AppShell() {
         />
         </main>
       </div>
+      <SiteFooter />
       <MobileTabBar />
     </div>
   )
