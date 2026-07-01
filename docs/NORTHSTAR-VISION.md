@@ -465,7 +465,8 @@ Admin browser → any /admin/* screen (“Generate draft”)
 | E9 | Platform onboarding | First-run: pick persona **or** browse official (guest OK); capture role + goal for E16 matching | P1 | E4 | ☐ |
 | E8a | User paths — data model | `user_paths`, `user_path_nodes` — **requires auth** | P1 | E2 | ☐ |
 | E8b | Path builder UI | Fork official path, add/remove/reorder resources | P1 | E8a, E4 | ☐ |
-| E3 | Community page `/community` | Stats, shared notes, submissions, contributors, weekly activity widget | P1 | E4 | ☐ |
+| E3pre | Modernize community pages | Migrate Submit/Digest/Team to design-system primitives (`PageHeader`/`Card`/`Button`/`Input`) — closes the polish gap before unifying. **Admin excluded** (E5 CMS rebuilds it). Runs after E2, before E3 | P1 | E2 | ☐ |
+| E3 | Community page `/community` | Stats, shared notes, submissions, contributors, weekly activity widget | P1 | E4, E3pre | ☐ |
 | E13 | Phase completion share card | Auto-generate OG image/card on phase completion; LinkedIn/Twitter share; Satori or canvas | P1 | E2 | ☐ |
 | E14 | Private resource notes | Per-resource private “my takeaways” — separate from D8 public notes; searchable from /profile | P1 | E2 | ☐ |
 | E16a | Community — phase cohort count | “42 learners on this phase this week” — extends D1 stats to feel like live social presence | P1 | D1 ✅, E3 | ☐ |
