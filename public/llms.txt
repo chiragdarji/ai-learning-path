@@ -1,0 +1,28 @@
+# AI Learning Path (vidyanix.ai)
+
+> The practitioner-validated, community-curated AI engineering curriculum — a sequenced path from LLM basics to production agents, updated with what is shipping in production. Browse free, no sign-in required. Curriculum version 2026-q2 (June 2026 curriculum): Initial public curriculum snapshot with 7 phases and ~65 resources.
+
+This site helps working engineers, managers, and product people learn AI engineering through a curated, link-checked path organized into phases, with persona tracks (Manager, IC Engineer, PM, Data Scientist, Full) and a monthly news-to-curriculum ritual. It is not an AI chatbot; content is human-curated.
+
+## Curriculum phases
+
+- [Phase 1: AI & ML Foundations](https://www.vidyanix.ai/phase/foundations) — Beginner. Build mathematical intuition, Python fluency, and classical ML literacy before touching LLMs.
+- [Phase 2: LLM Fundamentals](https://www.vidyanix.ai/phase/llm-fundamentals) — Beginner → Intermediate. Understand how transformers work, how to prompt effectively, and how LLMs are built.
+- [Phase 3: Applied LLM Engineering](https://www.vidyanix.ai/phase/applied-llm) — Intermediate. RAG, embeddings, vector search, and evaluation — the skills behind production LLM apps.
+- [Phase 4: Agent Foundations](https://www.vidyanix.ai/phase/agent-foundations) — Intermediate → Advanced. Understand agent architectures, core papers, and design patterns before building your own.
+- [Phase 5: Building Production Agents](https://www.vidyanix.ai/phase/production-agents) — Advanced. MCP, memory, evaluation, browser agents, and shipping agents users can trust.
+- [Phase 6: Expert Mastery](https://www.vidyanix.ai/phase/expert-mastery) — Expert. Multi-agent orchestration, LLMOps at scale, research depth, and system-level thinking.
+- [Phase 7: AI News Radar](https://www.vidyanix.ai/phase/ai-news-radar) — Ongoing. Stay current with the AI landscape and turn every headline into a deliberate learning action — powered by GetStream's awesome-ai-news.
+
+## Data & reference
+
+- [Curriculum JSON API](https://www.vidyanix.ai/api/v1/curriculum.json) — full machine-readable phases, steps, and resources
+- [Search resources](https://www.vidyanix.ai/search) — every resource, filterable by type and difficulty
+- [AI News Radar](https://www.vidyanix.ai/news-radar) — headlines mapped to curriculum phases
+- [Sitemap](https://www.vidyanix.ai/sitemap.xml)
+
+## Notes for AI crawlers
+
+- Canonical content lives in the curriculum JSON API above; prefer it for structured queries.
+- The curriculum is versioned (`2026-q2`); the API includes a `meta` block with the current version.
+- No user data, credentials, or private notes are exposed here — only the public curriculum.
