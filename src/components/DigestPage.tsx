@@ -6,6 +6,8 @@ import { subscribeDigest } from '../services/communityFeatures'
 import { LEARNING_PATH } from '../data/learningPath'
 import { PERSONAS } from '../data/personas'
 import { RECENT_HIGHLIGHTS } from '../data/aiNewsRadar'
+import { PageHeader } from './PageHeader'
+import { Card, Button } from './ui'
 
 export function DigestPage() {
   const { user } = useAuth()
@@ -34,14 +36,13 @@ export function DigestPage() {
 
   return (
     <article className="community-page">
-      <header className="page-header">
-        <p className="eyebrow">Community</p>
-        <h1>Weekly digest</h1>
+      <PageHeader eyebrow="Community" title="Weekly digest">
         <p className="lead">
           Three essential resources plus one news headline mapped to a learning action.
         </p>
-      </header>
+      </PageHeader>
 
+      <Card>
       <section className="digest-preview">
         <h2>This week&apos;s picks</h2>
         <ol>
@@ -64,7 +65,9 @@ export function DigestPage() {
           </>
         )}
       </section>
+      </Card>
 
+      <Card>
       <form
         className="community-form digest-form"
         onSubmit={(e) => {
@@ -84,11 +87,10 @@ export function DigestPage() {
             required
           />
         </label>
-        <button type="submit" className="auth-btn primary">
-          Subscribe
-        </button>
+        <Button type="submit">Subscribe</Button>
         {message && <p className="auth-message">{message}</p>}
       </form>
+      </Card>
 
       <p>
         <Link to="/">← Back to overview</Link>
