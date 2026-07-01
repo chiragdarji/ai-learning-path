@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthProvider'
 import { useLocale } from '../context/LocaleProvider'
 import { submitResource } from '../services/communityFeatures'
 import { SignInPrompt } from './SignInPrompt'
+import { PageHeader } from './PageHeader'
+import { Card, Button } from './ui'
 
 export function SubmitResourcePage() {
   const { user } = useAuth()
@@ -29,12 +31,11 @@ export function SubmitResourcePage() {
 
   return (
     <article className="community-page">
-      <header className="page-header">
-        <p className="eyebrow">Community</p>
-        <h1>{t.community.submitTitle}</h1>
+      <PageHeader eyebrow="Community" title={t.community.submitTitle}>
         <p className="lead">{t.community.submitLead}</p>
-      </header>
+      </PageHeader>
 
+      <Card>
       <form
         className="community-form"
         onSubmit={(e) => {
@@ -111,11 +112,12 @@ export function SubmitResourcePage() {
             required
           />
         </label>
-        <button type="submit" className="auth-btn primary" disabled={submitting}>
+        <Button type="submit" disabled={submitting}>
           {submitting ? 'Submitting…' : 'Submit for review'}
-        </button>
+        </Button>
         {message && <p className="auth-message">{message}</p>}
       </form>
+      </Card>
     </article>
   )
 }

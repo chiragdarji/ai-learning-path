@@ -11,6 +11,9 @@ import {
   type TeamSummary,
 } from '../services/communityFeatures'
 import { LEARNING_PATH } from '../data/learningPath'
+import { PageHeader } from './PageHeader'
+import { SignInPrompt } from './SignInPrompt'
+import { Button } from './ui'
 
 export function TeamPage() {
   const { user } = useAuth()
@@ -42,7 +45,7 @@ export function TeamPage() {
   if (!user) {
     return (
       <article className="community-page">
-        <p>Sign in to manage team assignments.</p>
+        <SignInPrompt message="Sign in to manage team assignments." />
         <Link to="/">← Back</Link>
       </article>
     )
@@ -50,13 +53,11 @@ export function TeamPage() {
 
   return (
     <article className="community-page">
-      <header className="page-header">
-        <p className="eyebrow">Team</p>
-        <h1>{t.community.assign}</h1>
+      <PageHeader eyebrow="Team" title={t.community.assign}>
         <p className="lead">
           Create a team and assign curriculum resources by member user ID (from Supabase auth).
         </p>
-      </header>
+      </PageHeader>
 
       <section className="team-section">
         <h2>Your teams</h2>
@@ -80,9 +81,9 @@ export function TeamPage() {
             onChange={(e) => setTeamName(e.target.value)}
             required
           />
-          <button type="submit" className="action-btn">
+          <Button type="submit" variant="secondary">
             Create team
-          </button>
+          </Button>
         </form>
         <ul className="admin-list">
           {teams.map((team) => (
@@ -140,9 +141,7 @@ export function TeamPage() {
                 required
               />
             </label>
-            <button type="submit" className="auth-btn primary">
-              Assign
-            </button>
+            <Button type="submit">Assign</Button>
           </form>
         </section>
       )}
